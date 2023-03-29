@@ -1,0 +1,96 @@
+#Form,
+.card,
+.car {
+    background-color: rgba(255, 0, 0, 0);
+    border: 0;
+}
+
+div.row,
+table,
+th,
+input,
+mat-label,
+mat-paginator {
+  font-weight: bolder;
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+
+table {
+  text-align: center !important;
+}
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-cell {
+  padding-right: 1vw;
+}
+
+@media screen and (max-width: 960px) {
+  table {
+    width: 100%;
+  }
+  :host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  // tr {
+  //   display: flex;
+  //   flex-direction: column;
+  //   margin: 0px 20px 250px;
+  // }
+
+  .mat-cell {
+    &:first-of-type, &:last-of-type {
+      padding-left: 0px;
+    }
+  }
+  .mat-header-cell{
+    &:last-of-type, &:first-of-type{
+      padding: 0px;
+    }
+  }
+
+  .mat-column-id_descarga, 
+  .mat-column-fecha_desde,
+  .mat-column-fecha_hasta,
+  .mat-column-fecha_creacion,
+  .mat-column-fecha_actualizacion,
+  .mat-column-estado,
+  .mat-column-acciones{
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    align-items: center;
+    justify-content: center;
+  }
+  .mat-column-acciones{
+    display: flex;
+    flex-direction: row;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+
+  .mat-sort-header{
+    margin-left: 20px;
+  }
+  td.mat-cell:last-of-type{
+    padding: 0;
+  }
+
+  
+
+}
+
+
+// td, input, select{
+//     background-color: rgb(223, 245, 242);
+// }

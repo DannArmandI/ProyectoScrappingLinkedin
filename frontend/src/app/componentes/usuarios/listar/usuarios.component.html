@@ -1,0 +1,802 @@
+<!-- -1 btn editar password 3 formulario editar pass -->
+<div class="mostrar">
+  <div class="row p-0 m-0">
+    <div *ngIf="num != 2" class="col-12 text-right w-100">
+      <a (click)="num = 2; limpiar()">
+        <i class="fas fa-plus text-primary">Agregar Usuario</i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div>
+  <!-- <form [formGroup]="Editar" *ngIf="num == 1" (ngSubmit)="Editar2()">
+    <ul>
+      <img class="img" src="../../../assets/2.png" />
+      <li>
+        <div class="form-group row">
+          <label for="nombre" class="col-sm-1 col-form-label"
+            >Nombre Usuario</label
+          >
+          <div class="col-sm-7">
+            <input
+              type="nombre"
+              class="form-control"
+              id="nombre"
+              placeholder="Nombre"
+              formControlName="Nombre"
+              [(ngModel)]="Nombre"
+            />
+          </div>
+          <div
+            *ngIf="
+              Editar.controls['Nombre'].invalid &&
+              Editar.controls['Nombre'].touched
+            "
+            class="alert alert-danger"
+          >
+            Campo incorrecto
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="form-group row">
+          <label for="mail" class="col-sm-1 col-form-label">Mail</label>
+          <div class="col-sm-7">
+            <input
+              type="mail"
+              class="form-control"
+              id="mail"
+              placeholder="Mail"
+              formControlName="Mail"
+              [(ngModel)]="Mail"
+            />
+          </div>
+          <div
+            *ngIf="
+              Editar.controls['Mail'].invalid && Editar.controls['Mail'].touched
+            "
+            class="alert alert-danger"
+          >
+            Campo incorrecto
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="form-group row">
+          <label for="Estado" class="col-sm-1 col-form-label">Estado</label>
+          <div class="col-sm-7">
+            <select
+              class="form-control"
+              id="Estado"
+              [(ngModel)]="Estado"
+              formControlName="Estado"
+            >
+              <option value="1" selected>Activado</option>
+              <option value="0">Desactivado</option>
+            </select>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!Editar.valid"
+        >
+          Editar
+        </button>
+      </li>
+    </ul>
+  </form> -->
+</div>
+
+<div class="card border-left-primary" *ngIf="num == 2">
+  <div class="row justify-content-md-center">
+    <div class="col-lg-7">
+      <div class="p-5">
+        <div class="text-center">
+          <h1 class="h4 text-gray-900 mb-4">{{ Label1 }}</h1>
+        </div>
+        <form class="user" [formGroup]="AgregarUsuario">
+          <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="col-12 m-0 p-0 position-relative">
+                <div
+                  *ngIf="
+                    AgregarUsuario.controls['nombre'].invalid &&
+                    AgregarUsuario.controls['nombre'].touched
+                  "
+                >
+                  <label
+                    class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                    for="nombre_usuario"
+                    >campo obligatorio*</label
+                  >
+                </div>
+                <input
+                  type="text"
+                  data-toggle="tooltip"
+                  title="Nombre Usuario"
+                  [(ngModel)]="userRegister.nombre_usuario"
+                  id="nombre_usuario"
+                  formControlName="nombre"
+                  class="form-control form-control-user"
+                  placeholder="Nombre usuario"
+                />
+              </div>
+            </div>
+
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="col-12 m-0 p-0 position-relative">
+                <div
+                  *ngIf="
+                    AgregarUsuario.controls['mail'].invalid &&
+                    AgregarUsuario.controls['mail'].touched
+                  "
+                >
+                  <label
+                    class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                    for="correo_electronico"
+                    >campo obligatorio*</label
+                  >
+                </div>
+                <input
+                  type="email"
+                  data-toggle="tooltip"
+                  title="Correo Electrónico"
+                  [(ngModel)]="userRegister.correo_electronico"
+                  id="correo_electronico"
+                  formControlName="mail"
+                  class="form-control form-control-user"
+                  placeholder="Correo Electrónico"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div
+                *ngIf="
+                  AgregarUsuario.controls['rut'].invalid &&
+                  AgregarUsuario.controls['rut'].touched
+                "
+              >
+                <label
+                  class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                  for="rut"
+                  >campo obligatorio*</label
+                >
+              </div>
+              <input
+                type="text"
+                data-toggle="tooltip"
+                title="Rut Usuario"
+                [(ngModel)]="userRegister.rut_usuario"
+                class="form-control form-control-user"
+                id="rut"
+                placeholder="Rut Usuario"
+                formControlName="rut"
+              />
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div
+                *ngIf="
+                  AgregarUsuario.controls['estado'].invalid &&
+                  AgregarUsuario.controls['estado'].touched
+                "
+              >
+                <label
+                  class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                  for="estado"
+                  >campo obligatorio*</label
+                >
+              </div>
+              <select
+                id="estado"
+                data-toggle="tooltip"
+                title="Estado Usuario"
+                formControlName="estado"
+                [(ngModel)]="userRegister.estado"
+                name="estado"
+                class="form-control border"
+              >
+                <option *ngIf="Label1 == 'Agregar Usuario'" value="default">
+                  Seleccione Estado
+                </option>
+                <option value="1">Activo</option>
+                <option value="0">Desactivado</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="rol == 1">
+            <div class="col-sm-12 mb-12 mb-sm-0">
+              <div
+                *ngIf="
+                  AgregarUsuario.controls['idCliente'].invalid &&
+                  AgregarUsuario.controls['idCliente'].touched
+                "
+              >
+                <label
+                  class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                  for="idCliente"
+                  >campo obligatorio*</label
+                >
+              </div>
+              <select
+                id="idCliente"
+                data-toggle="tooltip"
+                title="Cliente"
+                formControlName="idCliente"
+                [(ngModel)]="userRegister.id_cliente"
+                name="cliente"
+                class="form-control border"
+              >
+                <option *ngIf="Label1 == 'Agregar Usuario'" value="default">
+                  Seleccione Cliente
+                </option>
+                <option
+                  *ngFor="let cliente of clientes"
+                  value="{{ cliente.id_cliente }}"
+                >
+                  {{ cliente.razon_social }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <button
+            class="btn btn-primary btn-user btn-block"
+            (click)="register()"
+          >
+            <i class="fas fa-check"></i>
+            Guardar Cambios
+          </button>
+          <button class="btn btn-danger btn-user btn-block" (click)="num = 0; getUsuarios();">
+            <i class="fas fa-arrow-left"></i>
+            Cancelar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+
+
+
+<div class="row justify-content-md-center" *ngIf="num == 2">
+  <form [formGroup]="AgregarUsuario">
+    <table style="width: 100%">
+      <thead>
+        <tr>
+          <th style="position: relative; right: -7vw">{{Label1}}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <label for="nombre_plan">Nombre: </label>
+          </td>
+          <td>
+            <input
+              formControlName="nombre"
+              id="nombre_plan"
+              type="text"
+              [(ngModel)]="userRegister.nombre_usuario"
+            />
+            <div
+              class="mensajesValidar"
+              *ngIf="
+                AgregarUsuario.controls['nombre'].invalid &&
+                AgregarUsuario.controls['nombre'].touched
+              "
+            >
+              Ingrese nombre de Usuario
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="numero_usuarios">Email: </label>
+          </td>
+          <td>
+            <input
+              id="numero_usuarios"
+              type="text"
+              formControlName="mail"
+              [(ngModel)]="userRegister.correo_electronico"
+            />
+            <div
+              class="mensajesValidar"
+              *ngIf="
+                AgregarUsuario.controls['mail'].invalid &&
+                AgregarUsuario.controls['mail'].touched
+              "
+            >
+              Ingrese mail
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="numero_menciones">Rut: </label>
+          </td>
+          <td>
+            <input
+              id="numero_menciones"
+              type="text"
+              formControlName="rut"
+              [(ngModel)]="userRegister.rut_usuario"
+            />
+            <div
+              class="mensajesValidar"
+              *ngIf="
+                AgregarUsuario.controls['rut'].invalid &&
+                AgregarUsuario.controls['rut'].touched
+              "
+            >
+              Ingrese rut
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="precio_CLP">Estado: </label>
+          </td>
+          <td>
+            <select formControlName="estado" [(ngModel)]="userRegister.estado" style="width: 70%;">
+              <option value="1">Activo</option>
+              <option value="0">Desactivado</option>
+            </select>
+            <!-- <div class="col-sm-2">
+            </div>
+        </td>
+        </tr>
+        <tr *ngIf="rol==1">
+          <td>
+            <label for="precio_USD">Cliente: </label>
+          </td>
+          <td>
+            <select
+              [(ngModel)]="userRegister.id_cliente"
+              style="width: 70% ;"
+              formControlName="idCliente"
+            >
+              <option
+                *ngFor="let cliente of clientes"
+                value="{{ cliente.id_cliente }}"
+              >
+                {{ cliente.razon_social }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr id="filaBotones">
+          <td class="c"></td>
+          <td class="c">
+            <a (click)="num=0" id="botonCancelar"
+              ><mat-icon>cancel</mat-icon></a
+            >
+            <a
+              id="botonListo" (click)="register()"
+              ><mat-icon>check_circle</mat-icon></a
+            >
+          < </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+
+
+
+
+  <!-- <div class="col-md-9 offset-md-4">
+    <form #addUser *ngIf="num == 2" class="mx-auto">
+      <div class="form-group row">
+        <label for="inputName" class="col-sm-2 col-form-label">Nombre</label>
+        <div class="col-sm-2">
+          <input
+            name="nombre usuario"
+            type="text"
+            class="form-control"
+            id="inputName"
+            placeholder="Nombre usuario"
+            [(ngModel)]="userRegister.nombre_usuario"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-2">
+          <input
+            type="email"
+            class="form-control"
+            id="inputEmail3"
+            placeholder="Email"
+            name="email usuario"
+            [(ngModel)]="userRegister.correo_electronico"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="inputRut" class="col-sm-2 col-form-label">Rut</label>
+        <div class="col-sm-2">
+          <input
+            type="text"
+            class="form-control"
+            id="inputRut"
+            name="rut usuario"
+            placeholder="Rut usuario"
+            [(ngModel)]="userRegister.rut_usuario"
+          />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="inputRut" class="col-sm-2 col-form-label">Estado</label>
+        <div class="col-sm-2">
+          <select
+            class="custom-select mr-sm-2"
+            id="inlineFormCustomSelect"
+            name="estado usuario"
+            [(ngModel)]="userRegister.estado"
+          >
+            <option value="1">Activo</option>
+            <option value="0">Desactivado</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row" *ngIf="rol == 1">
+        <label for="inputRut" class="col-sm-2 col-form-label">Rol</label>
+        <div class="col-sm-2">
+          <select
+            class="custom-select mr-sm-2"
+            id="rol-user"
+            name="estado usuario"
+            [(ngModel)]="userRegister.id_rol"
+          >
+            <option value="2">admin</option>
+            <option value="3">user</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row" *ngIf="rol == 1">
+        <label for="inputRut" class="col-sm-2 col-form-label">Clientes</label>
+        <div class="col-sm-2">
+          <select
+            class="custom-select mr-sm-2"
+            id="cliente"
+            name="cliente"
+            [(ngModel)]="userRegister.id_cliente"
+          >
+            <option
+              *ngFor="let cliente of clientes"
+              value="{{ cliente.id_cliente }}"
+            >
+              {{ cliente.razon_social }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-2">
+          <button type="submit" class="btn btn-primary" (click)="register()">
+            Sign in
+          </button>
+        </div>
+        <div class="col-sm-1">
+          <button type="submit" class="btn btn-primary" (click)="num = 0">
+            volver
+          </button>
+        </div>
+      </div>
+    </form>
+  </div> -->
+<!-- </div> -->
+<!-- <div class="hola">
+
+</div> -->
+<!-- <div class="container" *ngIf="num == -1">
+  <div class="row">
+    <div class="col-3">
+      <button type="button" class="btn btn-primary" (click)="num = 3">
+        <mat-icon>lock</mat-icon>Cambiar Contraseña
+      </button>
+    </div>
+  </div>
+</div> -->
+<!-- <div class="row">
+  <div class="col-md-9 offset-md-4">
+    <form *ngIf="num == 3" id="eo" (ngSubmit)="editarUsuario()">
+      <div class="form-group row">
+        <div class="form-group col-md-4">
+          <label for="inputPassword4">Password Actual</label>
+          <input
+            type="password"
+            class="form-control"
+            id="passwordActual"
+            name="password actual"
+            placeholder="Password"
+            [(ngModel)]="passwordActual"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Nueva Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="passwordNuevo"
+            name="new password"
+            placeholder="Password"
+            [(ngModel)]="newPassword"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="form-group col-md-6">
+          <label for="inputPassword4">Confirmar Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="passwordNuevoConfirmar"
+            name="password Confrm"
+            placeholder="Password"
+            [(ngModel)]="newPasswordConfirm"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <button type="submit" class="btn btn-primary">Confirmar</button>
+        </div>
+        <div class="col-3">
+          <button type="button" class="btn btn-primary" (click)="num = -1">
+            volver
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div> -->
+
+<div class="container-fluid" *ngIf="num == 0">
+  <div class="row justify-content-md-center" >
+    <mat-form-field appearance="standard">
+      <mat-label style="font-weight: bolder;">Buscar</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Ingrese filtro"
+        #input
+        style="font-weight: bolder;"
+      />
+    </mat-form-field>
+  </div>
+  <div class="row justify-content-md-center" style="font-weight: bolder;">
+    <table
+      mat-table
+      [dataSource]="datasource"
+      matSort
+      (matSortChange)="announceSortChange($event)"
+      class="mat-elevation-z8"
+      style="font-weight: bolder;"
+    >
+      <!-- Position Column -->
+      <ng-container matColumnDef="id_usuario">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by id_usuario"
+        >
+          id
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.id_usuario }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="nombre_usuario">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by nombre_usuario"
+        >
+          Nombre Usuario
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.nombre_usuario }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="correo_electronico">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by correo_electronico"
+        >
+          Correo Electrónico
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.correo_electronico }}
+        </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="rut_usuario">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Rut rut_usuario"
+        >
+          Rut Usuario
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.rut_usuario }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="razon_social">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by razon_social"
+        >
+          Cliente
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.razon_social }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by estado"
+        >
+          Estado
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.estado == 1; else desactivo">Activo</span>
+          <ng-template #desactivo>
+            <td>Desactivado</td>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by symbol"
+        >
+          Acciones
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            class="btn btn-success btn-icon-split mr-1"
+            (click)="editar(element)"
+            style="width: fit-content; padding: 0%"
+          >
+            <span class="icon text-white-50"
+              ><i class="fas fa-user-edit"></i
+            ></span>
+            <!-- <span class="text"></span> -->
+          </button>
+          <button
+            class="btn btn-info btn-icon-split"
+            *ngIf="element.id_usuario == idUsuario; else notUser"
+            (click)="mensaje()"
+            style="width: fit-content; padding: 0%"
+            disabled
+          >
+            <span class="icon text-white-50"
+              ><i class="fas fa-toggle-on"></i
+            ></span>
+            <!-- <span class="text">Actual</span> -->
+          </button>
+          <ng-template #notUser>
+            <button
+              *ngIf="element.estado == 0"
+              class="btn btn-danger btn-icon-split"
+              (click)="alternar(element.id_usuario, element.estado)"
+              style="width: fit-content; padding: 0%"
+            >
+              <span class="icon text-white-50"
+                ><i class="fas fa-toggle-off"></i
+              ></span>
+              <!-- <span class="text">Activar</span> -->
+            </button>
+            <button
+              *ngIf="element.estado == 1"
+              class="btn btn-info btn-icon-split"
+              (click)="alternar(element.id_usuario, element.estado)"
+              style="width: fit-content; padding: 0%"
+            >
+              <span class="icon text-white-50"
+                ><i class="fas fa-toggle-on"></i
+              ></span>
+              <!-- <span class="text">Desactivar</span> -->
+            </button>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+<br>
+<div class="row justify-content-md-center" >
+  <mat-paginator
+    [hidden]="num != 0"
+    [pageSizeOptions]="[5, 10, 25, 50, 100]"
+    showFirstLastButtons
+    style="font-weight: bolder;"
+  ></mat-paginator>
+</div>
+
+<!--
+<div class="row justify-content-md-center" *ngIf="num == 0">
+  <div class="col-m-8">
+    <table class="table table-bordered" id="dataTable" cellspacing="0">
+      <thead>
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nombre Usuario</th>
+          <th scope="col">Correo Electrónico</th>
+          <th scope="col">Rut Usuario</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuariosServices.usuarios">
+          <td>{{ usuario.id_usuario }}</td>
+          <td>{{ usuario.nombre_usuario }}</td>
+          <td>{{ usuario.correo_electronico }}</td>
+          <td>{{ usuario.rut_usuario }}</td>
+          <td>{{ usuario.razon_social }}</td>
+          <td *ngIf="usuario.estado == 1; else desactivo">Activo</td>
+          <ng-template #desactivo>
+            <td>Desactivado</td>
+          </ng-template>
+          <td> -->
+<!-- <a class="edit" (click)="editar(usuario)">
+            <mat-icon>edit</mat-icon>
+          </a> -->
+<!-- <button class="btn btn-success btn-icon-split p-1 mr-1" (click)="editar(usuario)">
+              <i class="fas fa-user-edit"></i>Editar
+            </button>
+            <button class="btn btn-info btn-icon-split p-1" *ngIf="usuario.id_usuario == idUsuario; else notUser"
+              (click)="mensaje()" disabled>
+              <i class="fas fa-toggle-on"></i>Actual
+            </button>
+            <ng-template #notUser>
+              <button *ngIf="usuario.estado == 0" class="btn btn-danger btn-icon-split p-1"
+                (click)="alternar(usuario.id_usuario, usuario.estado)">
+                <i class="fas fa-toggle-off"></i>Activar
+              </button>
+              <button *ngIf="usuario.estado == 1" class="btn btn-info btn-icon-split p-1"
+                (click)="alternar(usuario.id_usuario, usuario.estado)">
+                <i class="fas fa-toggle-on"></i>Desactivar
+              </button>
+            </ng-template> -->
+<!-- <a class="active" *ngIf="usuario.estado==1; else eliminado" (click)="desactivar(usuario.id_usuario)"><mat-icon>toggle_on</mat-icon></a> -->
+<!-- </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->

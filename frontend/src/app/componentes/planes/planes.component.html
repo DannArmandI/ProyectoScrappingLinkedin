@@ -1,0 +1,891 @@
+<div class="mostrar">
+  <div class="row p-0 m-0">
+    <div class="col-12 text-right w-100">
+      <a (click)="flagMetodo ='agregar'; title='Agregar Plan'; resetPlanes()"
+        *ngIf="flagMetodo!='agregar' && flagMetodo!='editar'"><i class="fas fa-plus text-primary ">Agregar Plan</i></a>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="card border-left-primary" *ngIf="flagMetodo == 'agregar'">
+
+  <div class="row justify-content-md-center ">
+
+    <div class="col-lg-7 ">
+      <div class="p-5">
+        <div class="text-center">
+          <h1 class="h4 text-gray-900 mb-4">{{title}}</h1>
+        </div>
+        <form class="user" [formGroup]="objetoPlan">
+
+          <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+
+              <div class="col-12 m-0 p-0 position-relative">
+                <div *ngIf="
+                objetoPlan.controls['nombre_plan'].invalid &&
+                objetoPlan.controls['nombre_plan'].touched
+              ">
+                  <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position-4"
+                    for="nombre_plan">campo obligatorio*</label>
+                </div>
+                <input type="text" data-toggle="tooltip" title="Nombre Plan suscripción" id="nombre_plan"
+                  formControlName="nombre_plan" class="form-control form-control-user" placeholder="Nombre Plan">
+              </div>
+            </div>
+
+            <div class="col-sm-6 mb-3 mb-sm-0">
+
+              <div class="col-12 m-0 p-0 position-relative">
+                <div *ngIf="
+                objetoPlan.controls['numero_usuarios'].invalid &&
+                objetoPlan.controls['numero_usuarios'].touched
+              ">
+                  <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                    for="numero_usuarios">campo obligatorio*</label>
+                </div>
+                <input type="text" id="numero_usuarios" data-toggle="tooltip" title="Cantidad Usuarios"
+                  formControlName="numero_usuarios" class="form-control form-control-user" placeholder="N° Usuarios">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+
+              <div class="col-12 m-0 p-0 position-relative">
+                <div *ngIf="
+                objetoPlan.controls['numero_menciones'].invalid &&
+                objetoPlan.controls['numero_menciones'].touched
+              ">
+                  <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                    for="numero_menciones">campo obligatorio*</label>
+                </div>
+                <input type="text" data-toggle="tooltip" title="Cantidad Menciones" id="numero_menciones"
+                  formControlName="numero_menciones" class="form-control form-control-user" placeholder="N° Menciones">
+              </div>
+            </div>
+
+
+            <div class="col-sm-6 mb-3 mb-sm-0">
+
+              <div class="col-12 m-0 p-0 position-relative">
+                <div *ngIf="
+                objetoPlan.controls['precio_CLP'].invalid &&
+                objetoPlan.controls['precio_CLP'].touched
+              ">
+                  <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                    for="precio_CLP">campo obligatorio*</label>
+                </div>
+                <input type="text" id="precio_CLP" data-toggle="tooltip" title="Precio Pesos Chilenos"
+                  formControlName="precio_CLP" class="form-control form-control-user" placeholder="Precio CLP">
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+          <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+
+              <div class="col-12 m-0 p-0 position-relative">
+                <div *ngIf="
+                objetoPlan.controls['precio_USD'].invalid &&
+                objetoPlan.controls['precio_USD'].touched
+              ">
+                  <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position-4"
+                    for="precio_USD">campo obligatorio*</label>
+                </div>
+                <input type="text" data-toggle="tooltip" title="Precio en Dolares" id="precio_USD"
+                  formControlName="precio_USD" class="form-control form-control-user" placeholder="Precio USD">
+              </div>
+            </div>
+
+
+            <div class="col-sm-6 mb-3 mb-sm-0">
+
+              <div class="col-12 m-0 p-0 position-relative">
+                <div *ngIf="
+                objetoPlan.controls['cantidad_reportes'].invalid &&
+                objetoPlan.controls['cantidad_reportes'].touched
+              ">
+                  <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                    for="cantidad_reportes">campo obligatorio*</label>
+                </div>
+                <input type="text" id="cantidad_reportes" data-toggle="tooltip" title="Cantidad de Reportes"
+                  formControlName="cantidad_reportes" class="form-control form-control-user"
+                  placeholder="Cantidad Reportes">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+
+              <div class="col-12 m-0 p-0 position-relative">
+                <div *ngIf="
+                objetoPlan.controls['porcentaje_descuento'].invalid &&
+                objetoPlan.controls['porcentaje_descuento'].touched
+              ">
+                  <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position-4"
+                    for="porcentaje_descuento">campo obligatorio*</label>
+                </div>
+                <input type="text" data-toggle="tooltip" title="Porcentaje de Descuento" id="porcentaje_descuento"
+                  formControlName="porcentaje_descuento" class="form-control form-control-user"
+                  placeholder="Porcentaje Descuento">
+              </div>
+            </div>
+
+
+            <div class="col-sm-6 mb-3 mb-sm-0">
+
+              <div class="col-12 m-0 p-0 position-relative">
+                <div *ngIf="
+                objetoPlan.controls['duracion_almacenamiento'].invalid &&
+                objetoPlan.controls['duracion_almacenamiento'].touched
+              ">
+                  <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                    for="duracion_almacenamiento">campo obligatorio*</label>
+                </div>
+                <input type="text" id="duracion_almacenamiento" data-toggle="tooltip" title="Duración de Almacenamiento"
+                  formControlName="duracion_almacenamiento" class="form-control form-control-user"
+                  placeholder="Duración Almacenamiento">
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+          <button class="btn btn-primary btn-user btn-block"
+            (click)="mostrarMetodos('mostrar'); agregarPlan(objetoPlan)">
+            <i class="fas fa-check"></i>
+            Agregar Plan
+          </button>
+          <button class="btn btn-danger btn-user btn-block " (click)="ngOnInit();mostrarMetodos('mostrar');">
+            <i class="fas fa-arrow-left"></i>
+            Cancelar
+          </button>
+          <!-- <button class="botonListo" (click)="
+              mostrarMetodos('mostrar'); agregarClienteTipo2(nuevoCliente)
+            ">
+              <mat-icon>check_circle</mat-icon>
+        </button>
+        <a class="botonCancelar" (click)="mostrarMetodos('mostrar')" disabled="true">
+          <mat-icon>cancel</mat-icon>
+        </a> -->
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+<div class="card border-left-primary" *ngIf="flagMetodo == 'editar'">
+
+  <div class="row justify-content-md-center ">
+
+    <div class="col-lg-7 ">
+      <div class="p-5">
+        <div class="text-center">
+          <h1 class="h4 text-gray-900 mb-4">{{title}}</h1>
+        </div>
+
+
+
+        <div *ngFor="let planes of metodos.planes">
+          <div *ngIf="planes.id_plan == auxId">
+            <form class="user" [formGroup]="objetoPlan">
+
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+
+                  <div class="col-12 m-0 p-0 position-relative">
+                    <div *ngIf="
+                    objetoPlan.controls['nombre_plan'].invalid &&
+                    objetoPlan.controls['nombre_plan'].touched
+                  ">
+                      <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position-4"
+                        for="nombre_plan">campo obligatorio*</label>
+                    </div>
+                    <input type="text"  [(ngModel)]="planes.nombre_plan" data-toggle="tooltip" title="Nombre Plan suscripción" id="nombre_plan"
+                      formControlName="nombre_plan" class="form-control form-control-user" placeholder="Nombre Plan">
+                  </div>
+                </div>
+                <div class="col-sm-6 mb-3 mb-sm-0">
+
+                  <div class="col-12 m-0 p-0 position-relative">
+                    <div *ngIf="
+                    objetoPlan.controls['numero_usuarios'].invalid &&
+                    objetoPlan.controls['numero_usuarios'].touched
+                  ">
+                      <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                        for="numero_usuarios">campo obligatorio*</label>
+                    </div>
+                    <input type="text"  [(ngModel)]="planes.numero_usuarios"  id="numero_usuarios" data-toggle="tooltip" title="Cantidad Usuarios"
+                      formControlName="numero_usuarios" class="form-control form-control-user" placeholder="N° Usuarios">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+
+                  <div class="col-12 m-0 p-0 position-relative">
+                    <div *ngIf="
+                    objetoPlan.controls['numero_menciones'].invalid &&
+                    objetoPlan.controls['numero_menciones'].touched
+                  ">
+                      <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                        for="numero_menciones">campo obligatorio*</label>
+                    </div>
+                    <input type="text"  [(ngModel)]="planes.numero_menciones" data-toggle="tooltip" title="Cantidad Menciones" id="numero_menciones"
+                      formControlName="numero_menciones" class="form-control form-control-user" placeholder="N° Menciones">
+                  </div>
+                </div>
+                <div class="col-sm-6 mb-3 mb-sm-0">
+
+                  <div class="col-12 m-0 p-0 position-relative">
+                    <div *ngIf="
+                    objetoPlan.controls['precio_CLP'].invalid &&
+                    objetoPlan.controls['precio_CLP'].touched
+                  ">
+                      <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                        for="precio_CLP">campo obligatorio*</label>
+                    </div>
+                    <input type="text"  [(ngModel)]="planes.precio_CLP" id="precio_CLP" data-toggle="tooltip" title="Precio Pesos Chilenos"
+                      formControlName="precio_CLP" class="form-control form-control-user" placeholder="Precio CLP">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+
+                  <div class="col-12 m-0 p-0 position-relative">
+                    <div *ngIf="
+                    objetoPlan.controls['precio_USD'].invalid &&
+                    objetoPlan.controls['precio_USD'].touched
+                  ">
+                      <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position-4"
+                        for="precio_USD">campo obligatorio*</label>
+                    </div>
+                    <input type="text" [(ngModel)]="planes.precio_USD" data-toggle="tooltip" title="Precio en Dolares" id="precio_USD"
+                      formControlName="precio_USD" class="form-control form-control-user" placeholder="Precio USD">
+                  </div>
+                </div>
+
+
+                <div class="col-sm-6 mb-3 mb-sm-0">
+
+                  <div class="col-12 m-0 p-0 position-relative">
+                    <div *ngIf="
+                    objetoPlan.controls['cantidad_reportes'].invalid &&
+                    objetoPlan.controls['cantidad_reportes'].touched
+                  ">
+                      <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                        for="cantidad_reportes">campo obligatorio*</label>
+                    </div>
+                    <input type="text"  [(ngModel)]="planes.cantidad_reportes" id="cantidad_reportes" data-toggle="tooltip" title="Cantidad de Reportes"
+                      formControlName="cantidad_reportes" class="form-control form-control-user"
+                      placeholder="Cantidad Reportes">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+
+                  <div class="col-12 m-0 p-0 position-relative">
+                    <div *ngIf="
+                    objetoPlan.controls['porcentaje_descuento'].invalid &&
+                    objetoPlan.controls['porcentaje_descuento'].touched
+                  ">
+                      <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position-4"
+                        for="porcentaje_descuento">campo obligatorio*</label>
+                    </div>
+                    <input type="text" [(ngModel)]="planes.porcentaje_descuento" data-toggle="tooltip" title="Porcentaje de Descuento" id="porcentaje_descuento"
+                      formControlName="porcentaje_descuento" class="form-control form-control-user"
+                      placeholder="Porcentaje Descuento">
+                  </div>
+                </div>
+
+
+                <div class="col-sm-6 mb-3 mb-sm-0">
+
+                  <div class="col-12 m-0 p-0 position-relative">
+                    <div *ngIf="
+                    objetoPlan.controls['duracion_almacenamiento'].invalid &&
+                    objetoPlan.controls['duracion_almacenamiento'].touched
+                  ">
+                      <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                        for="duracion_almacenamiento">campo obligatorio*</label>
+                    </div>
+                    <input type="text" [(ngModel)]="planes.duracion_almacenamiento" id="duracion_almacenamiento" data-toggle="tooltip" title="Duración de Almacenamiento"
+                      formControlName="duracion_almacenamiento" class="form-control form-control-user"
+                      placeholder="Duración Almacenamiento">
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+              <button class="btn btn-primary btn-user btn-block"
+                (click)="editarPlan(objetoPlan); mostrarMetodos('mostrar');">
+                <i class="fas fa-check"></i>
+                Editar Plan
+              </button>
+              <button class="btn btn-danger btn-user btn-block " (click)="ngOnInit();mostrarMetodos('mostrar');">
+                <i class="fas fa-arrow-left"></i>
+                Cancelar
+              </button>
+              <!-- <button class="botonListo" (click)="
+                  mostrarMetodos('mostrar'); agregarClienteTipo2(nuevoCliente)
+                ">
+                  <mat-icon>check_circle</mat-icon>
+            </button>
+            <a class="botonCancelar" (click)="mostrarMetodos('mostrar')" disabled="true">
+              <mat-icon>cancel</mat-icon>
+            </a> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+<div class="container-fluid" *ngIf="flagMetodo =='mostrar'">
+  <div class="row justify-content-md-center">
+  <mat-form-field appearance="standard">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese filtro" #input>
+  </mat-form-field>
+  </div>
+  <div class="row justify-content-md-center">
+  <table mat-table [dataSource]="datasource" matSort (matSortChange)="announceSortChange($event)"
+  class="mat-elevation-z8">
+  <!-- Position Column -->
+  <ng-container matColumnDef="id_plan">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id">
+      id Plan
+    </th>
+    <td mat-cell *matCellDef="let planes"> {{planes.id_plan}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="nombre_plan">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by nombre_plan">
+      Nombre Plan
+    </th>
+    <td mat-cell *matCellDef="let planes"> {{planes.nombre_plan}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="numero_usuarios">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by numero_usuarios">
+     Número Usuarios
+    </th>
+    <td mat-cell *matCellDef="let planes"> {{planes.numero_usuarios}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="numero_menciones">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Rut numero_menciones">
+      Número Menciones
+    </th>
+    <td mat-cell *matCellDef="let planes"> {{planes.numero_menciones}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="precio_CLP">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by precio_CLP">
+      Precio CLP
+    </th>
+    <td mat-cell *matCellDef="let planes"> {{ (planes.precio_CLP | currency:'CLP').replace(',','x').replace('.',',').replace('x','.').replace('CLP','$')}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="precio_USD">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by precio_USD">
+      Precio USD
+    </th>
+    <td mat-cell *matCellDef="let planes"> {{(planes.precio_USD | currency).replace('.','x').replace(',','.').replace('x',',')}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cantidad_reportes">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by cantidad_reportes">
+      Reportes
+    </th>
+    <td mat-cell *matCellDef="let planes"> {{planes.cantidad_reportes}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="porcentaje_descuento">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by porcentaje_descuento">
+      Descuentos
+    </th>
+    <td mat-cell *matCellDef="let planes"> {{planes.porcentaje_descuento}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="duracion_almacenamiento">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by duracion_almacenamiento">
+      Duración
+    </th>
+    <td mat-cell *matCellDef="let planes"> {{planes.duracion_almacenamiento}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="created_at">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by created_at">
+      Fecha Creación
+    </th>
+    <td mat-cell *matCellDef="let planes"> {{planes.created_at | date: 'YYYY-MM-dd'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="updated_at">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by updated_at">
+      Fecha Actualización
+    </th>
+    <td mat-cell *matCellDef="let planes"> {{planes.updated_at | date: 'YYYY-MM-dd'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="estado">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by estado">
+      Estado
+    </th>
+    <td mat-cell *matCellDef="let planes"> <span *ngIf="planes.estado==1; else desactivo">Activo</span>
+      <ng-template #desactivo>
+        <td>Desactivado</td>
+      </ng-template>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+      Acciones
+    </th>
+    <td mat-cell *matCellDef="let planes">
+      <button class="btn btn-success btn-icon-split mr-1"
+      (click)="mostrarMetodos('editar'); mostrarPlan(planes.id_plan); title='Editar Plan'" style="width: fit-content; padding: 0%">
+      <span class="icon text-white-50"><i class="fas fa-user-edit"></i></span>
+      <!-- <span class="text">Editar</span> -->
+    </button>
+    <button *ngIf="planes.estado == 1" class="btn btn-info btn-icon-split " style="width: fit-content; padding: 0%"
+      (click)="cambiarEstado(planes.id_plan, planes.estado)">
+      <span class="icon text-white-50"><i class="fas fa-toggle-on"></i></span>
+      <!-- <span class="text">Desactivar</span> -->
+    </button>
+    <button *ngIf="planes.estado == 0" class="btn btn-danger btn-icon-split " style="width: fit-content; padding: 0%"
+      (click)="cambiarEstado(planes.id_plan, planes.estado)">
+      <span class="icon text-white-50"><i class="fas fa-toggle-off"></i></span>
+      <!-- <span class="text">Activar</span> -->
+    </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>
+</div>
+<br>
+<div class="row justify-content-md-center">
+  <mat-paginator [hidden]="flagMetodo!='mostrar'" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>
+
+
+<!--
+<div class="row justify-content-md-center" *ngIf="flagMetodo =='mostrar'">
+  <div class="col-m-8">
+    <table class="table table-bordered" id="dataTable" cellspacing="0">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Usuarios</th>
+          <th scope="col">Menciones</th>
+          <th scope="col">Precio CLP</th>
+          <th scope="col">Precio USD</th>
+          <th scope="col">Reportes</th>
+          <th scope="col">Descuento</th>
+          <th scope="col">Duracion </th>
+          <th scope="col">Fecha de creac</th>
+          <th scope="col">Fecha de actua</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let planes of metodos.planes">
+          <td>{{ planes.id_plan }}</td>
+          <td>{{ planes.nombre_plan }}</td>
+          <td>{{ planes.numero_usuarios }}</td>
+          <td>{{ planes.numero_menciones }}</td>
+          <td>{{ (planes.precio_CLP | currency:'CLP').replace(',','x').replace('.',',').replace('x','.').replace('CLP','$')}}</td>
+          <td>{{ (planes.precio_USD | currency).replace('.','x').replace(',','.').replace('x',',')}}</td>
+          <td>{{ planes.cantidad_reportes }}</td>
+          <td>{{ planes.porcentaje_descuento }}</td>
+          <td>{{ planes.duracion_almacenamiento }}</td>
+          <td>{{ planes.created_at | ddMmYYYYDate }}</td>
+          <td>{{ planes.updated_at | ddMmYYYYDate }}</td>
+
+          <td *ngIf="planes.estado == 1; else Inactivo">Activo</td>
+          <td>
+            <button class="btn btn-success btn-icon-split p-1 mr-1"
+              (click)="mostrarMetodos('editar'); mostrarPlan(planes.id_plan); title='Editar Plan'">
+              <i class="fas fa-user-edit"></i>Editar
+            </button>
+            <button *ngIf="planes.estado == 1" class="btn btn-info btn-icon-split p-1"
+              (click)="cambiarEstado(planes.id_plan, planes.estado)">
+              <i class="fas fa-toggle-on"></i>Desactivar
+            </button>
+            <button *ngIf="planes.estado == 0" class="btn btn-danger btn-icon-split p-1"
+              (click)="cambiarEstado(planes.id_plan, planes.estado)">
+              <i class="fas fa-toggle-off"></i>Activar
+            </button>
+             <a class="active" *ngIf="usuario.estado==1; else eliminado" (click)="desactivar(usuario.id_usuario)"><mat-icon>toggle_on</mat-icon></a> -->
+          <!-- </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #Inactivo>
+      <td>Inactivo</td>
+    </ng-template>
+  </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div *ngIf="flagMetodo == 'agregar'" class="row justify-content-md-center">
+  <form [formGroup]="objetoPlan">
+    <table style="width: 100%;">
+      <thead>
+        <tr>
+          <th style="position: relative; right:-7vw">Agregar Plan</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <label for="nombre_plan">Nombre del plan: </label>
+          </td>
+          <td>
+            <input id="nombre_plan" type="text" formControlName="nombre_plan" />
+            <div class="mensajesValidar" *ngIf="
+                objetoPlan.controls['nombre_plan'].invalid &&
+                objetoPlan.controls['nombre_plan'].touched
+              ">
+              Ingrese nombre del plan
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="numero_usuarios">Cantidad de usuarios: </label>
+          </td>
+          <td>
+            <input id="numero_usuarios" type="text" formControlName="numero_usuarios" />
+            <div class="mensajesValidar" *ngIf="
+                objetoPlan.controls['numero_usuarios'].invalid &&
+                objetoPlan.controls['numero_usuarios'].touched
+              ">
+              Ingrese numero de usuarios
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="numero_menciones">Cantidad de menciones: </label>
+          </td>
+          <td>
+            <input id="numero_menciones" type="text" formControlName="numero_menciones" />
+            <div class="mensajesValidar" *ngIf="
+                objetoPlan.controls['numero_menciones'].invalid &&
+                objetoPlan.controls['numero_menciones'].touched
+              ">
+              Ingrese numero de menciones
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="precio_CLP">Precio en CLP: </label>
+          </td>
+          <td>
+            <input id="precio_CLP" type="text" formControlName="precio_CLP" />
+            <div class="mensajesValidar" *ngIf="
+                objetoPlan.controls['precio_CLP'].invalid &&
+                objetoPlan.controls['precio_CLP'].touched
+              ">
+              Ingrese valor en CLP
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="precio_USD">Precio en USD: </label>
+          </td>
+          <td>
+            <input id="precio_USD" type="text" formControlName="precio_USD" />
+            <div class="mensajesValidar" *ngIf="
+                objetoPlan.controls['precio_USD'].invalid &&
+                objetoPlan.controls['precio_USD'].touched
+              ">
+              Ingrese valor en USD
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="cantidad_reportes">Cantidad de reportes: </label>
+          </td>
+          <td>
+            <input id="cantidad_reportes" type="text" formControlName="cantidad_reportes" />
+            <div class="mensajesValidar" *ngIf="
+                objetoPlan.controls['cantidad_reportes'].invalid &&
+                objetoPlan.controls['cantidad_reportes'].touched
+              ">
+              Ingrese cantidad de reportes
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="porcentaje_descuento">Porcentaje de descuento: </label>
+          </td>
+          <td>
+            <input id="porcentaje_descuento" type="text" formControlName="porcentaje_descuento" />
+            <div class="mensajesValidar" *ngIf="
+                objetoPlan.controls['porcentaje_descuento'].invalid &&
+                objetoPlan.controls['porcentaje_descuento'].touched
+              ">
+              Ingrese descuento
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="duracion_almacenamiento">Duracion de almacenamiento:
+            </label>
+          </td>
+          <td>
+            <input id="duracion_almacenamiento" type="text" formControlName="duracion_almacenamiento" />
+            <div class="mensajesValidar" *ngIf="
+                objetoPlan.controls['duracion_almacenamiento'].invalid &&
+                objetoPlan.controls['duracion_almacenamiento'].touched
+              ">
+              Ingrese duracion de almacenamiento
+            </div>
+          </td>
+        </tr>
+        <tr id="filaBotones">
+          <td class="c"></td>
+          <td class="c">
+            <a (click)="mostrarMetodos('mostrar')" id="botonCancelar">
+              <mat-icon>cancel</mat-icon>
+            </a>
+            <a (click)="mostrarMetodos('mostrar'); agregarPlan(objetoPlan)" id="botonListo">
+              <mat-icon>check_circle</mat-icon>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div> -->
+
+
+
+
+
+
+<!--
+
+<div *ngIf="flagMetodo == 'editar'" class="row justify-content-md-center">
+  <div *ngFor="let planes of metodos.planes">
+    <div *ngIf="planes.id_plan == auxId">
+      <form [formGroup]="objetoPlan">
+        <table>
+          <thead>
+            <tr>
+              <th style="position: relative; right:-7vw">Editar Plan</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <label for="nombre_plan">Nombre del plan: </label>
+              </td>
+              <td>
+                <input id="nombre_plan" type="text" formControlName="nombre_plan" [(ngModel)]="planes.nombre_plan" />
+                <div class="mensajesValidar" *ngIf="
+                    objetoPlan.controls['nombre_plan'].invalid &&
+                    objetoPlan.controls['nombre_plan'].touched
+                  ">
+                  Ingrese nombre del plan
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="numero_usuarios">Cantidad de usuarios: </label>
+              </td>
+              <td>
+                <input id="numero_usuarios" type="text" formControlName="numero_usuarios"
+                  [(ngModel)]="planes.numero_usuarios" />
+                <div class="mensajesValidar" *ngIf="
+                    objetoPlan.controls['numero_usuarios'].invalid &&
+                    objetoPlan.controls['numero_usuarios'].touched
+                  ">
+                  Ingrese numero de usuarios
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="numero_menciones">Cantidad de menciones: </label>
+              </td>
+              <td>
+                <input id="numero_menciones" type="text" formControlName="numero_menciones"
+                  [(ngModel)]="planes.numero_menciones" />
+                <div class="mensajesValidar" *ngIf="
+                    objetoPlan.controls['numero_menciones'].invalid &&
+                    objetoPlan.controls['numero_menciones'].touched
+                  ">
+                  Ingrese numero de menciones
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="precio_CLP">Precio en CLP: </label>
+              </td>
+              <td>
+                <input id="precio_CLP" type="text" formControlName="precio_CLP" [(ngModel)]="planes.precio_CLP" />
+                <div class="mensajesValidar" *ngIf="
+                    objetoPlan.controls['precio_CLP'].invalid &&
+                    objetoPlan.controls['precio_CLP'].touched
+                  ">
+                  Ingrese valor en CLP
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="precio_USD">Precio en USD: </label>
+              </td>
+              <td>
+                <input id="precio_USD" type="text" formControlName="precio_USD" [(ngModel)]="planes.precio_USD" />
+                <div class="mensajesValidar" *ngIf="
+                    objetoPlan.controls['precio_USD'].invalid &&
+                    objetoPlan.controls['precio_USD'].touched
+                  ">
+                  Ingrese valor en USD
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="cantidad_reportes">Cantidad de reportes: </label>
+              </td>
+              <td>
+                <input id="cantidad_reportes" type="text" formControlName="cantidad_reportes"
+                  [(ngModel)]="planes.cantidad_reportes" />
+                <div class="mensajesValidar" *ngIf="
+                    objetoPlan.controls['cantidad_reportes'].invalid &&
+                    objetoPlan.controls['cantidad_reportes'].touched
+                  ">
+                  Ingrese cantidad de reportes
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="porcentaje_descuento">Porcentaje de descuento:
+                </label>
+              </td>
+              <td>
+                <input id="porcentaje_descuento" type="text" formControlName="porcentaje_descuento"
+                  [(ngModel)]="planes.porcentaje_descuento" />
+                <div class="mensajesValidar" *ngIf="
+                    objetoPlan.controls['porcentaje_descuento'].invalid &&
+                    objetoPlan.controls['porcentaje_descuento'].touched
+                  ">
+                  Ingrese descuento
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="duracion_almacenamiento">Duracion de almacenamiento:
+                </label>
+              </td>
+              <td>
+                <input id="duracion_almacenamiento" type="text" formControlName="duracion_almacenamiento"
+                  [(ngModel)]="planes.duracion_almacenamiento" />
+                <div class="mensajesValidar" *ngIf="
+                    objetoPlan.controls['duracion_almacenamiento'].invalid &&
+                    objetoPlan.controls['duracion_almacenamiento'].touched
+                  ">
+                  Ingrese duracion de almacenamiento
+                </div>
+              </td>
+            </tr>
+            <tr id="filaBotones">
+              <td class="c"></td>
+              <td class="c">
+                <a (click)="mostrarMetodos('mostrar')" id="botonCancelar">
+                  <mat-icon>cancel</mat-icon>
+                </a>
+                <a (click)="mostrarMetodos('mostrar'); editarPlan(objetoPlan)" id="botonListo">
+                  <mat-icon>check_circle</mat-icon>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div> -->

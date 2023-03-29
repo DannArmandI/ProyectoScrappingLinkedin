@@ -1,0 +1,160 @@
+<!-- <div class="container-fluid">
+    <h1>Inicio de Sesión</h1>
+    <form [formGroup]="IniciarSesion" *ngIf="Num()==0" (ngSubmit)="Iniciar()">
+        <ul>
+            <img class="img" src="../../../assets/2.png">
+            <li>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-1 col-form-label">Email</label>
+                    <div class="col-sm-7">
+                        <input type="email" class="form-control" id="email" placeholder="Email" formControlName="mail" [(ngModel)]="mail">
+                    </div>
+                    <div *ngIf="IniciarSesion.controls['mail'].invalid && ( IniciarSesion.controls['mail'].touched)" class="alert alert-danger">
+                        Campo incorrecto
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-1 col-form-label">Pass</label>
+                    <div class="col-sm-7">
+                        <input type="password" class="form-control" id=pass placeholder="Contraseña" formControlName="password" [(ngModel)]="password">
+                    </div>
+                    <div *ngIf="IniciarSesion.controls['password'].invalid && ( IniciarSesion.controls['password'].touched)" class="alert alert-danger">
+                        Campo incorrecto
+                    </div>
+                </div>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-primary" [disabled]="!IniciarSesion.valid">Iniciar Sesión</button>
+                <button type="submit" class="btn btn-primary" routerLink="/principal" (click)="Iniciar()">Iniciar Sesión</button>
+            </li>
+        </ul>
+    </form>
+    <form [formGroup]="Registrarse" *ngIf="Num()==1" (ngSubmit)="cambiar()">
+        <ul>
+            <img class="img" src="../../../assets/2.png">
+            <li>
+                <div class="form-group row">
+                    <label for="Empresa" class="col-sm-1 col-form-label">Empresa</label>
+                    <div class="col-sm-7">
+                        <input type="Empresa" class="form-control" id="Empresa" placeholder="Empresa" formControlName="Empresa" [(ngModel)]="Empresa">
+                    </div>
+                    <div *ngIf="Registrarse.controls['Empresa'].invalid && (Registrarse.controls['Empresa'].touched)" class="alert alert-danger">
+                        Campo incorrecto
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-1 col-form-label">Email</label>
+                    <div class="col-sm-7">
+                        <input type="email" class="form-control" id="email" placeholder="Email" formControlName="mail" [(ngModel)]="mail">
+                    </div>
+                    <div *ngIf="Registrarse.controls['mail'].invalid && ( Registrarse.controls['mail'].touched)" class="alert alert-danger">
+                        Campo incorrecto
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="form-group row">
+                    <label for="Pais" class="col-sm-1 col-form-label">Pais</label>
+                    <div class="col-sm-7">
+                        <select class="form-control" id="Pais" [(ngModel)]="Pais" formControlName="Pais">
+                        <option value="1" selected>Chile</option>
+                        <option value="2">Peru</option>
+                        <option value="3">Argentina</option>
+                        </select>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <button type="submit" class="btn btn-primary" [disabled]="!Registrarse.valid" (click)="registrarse()">registrarse</button>
+            </li>
+        </ul>
+    </form>
+</div> -->
+
+<div class="container align-items-center">
+  <!-- Outer Row -->
+  <div class="row justify-content-center align-items-center" style="height: 100vh;">
+    <div class="col-xs-9 col-sm-9 col-md-7 col-lg-5">
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+          <!-- Nested Row within Card Body -->
+          <div class="row row justify-content-center">
+            <!-- <div class="col-lg-6 d-none d-lg-block bg-login-image"></div> -->
+            <div class="col-lg-12">
+              <div class="p-5">
+                <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-4">Bienvenido</h1>
+                </div>
+                <form
+                  [formGroup]="IniciarSesion"
+                  class="user"
+                  (ngSubmit)="Iniciar()"
+                >
+                  <div class="form-group">
+                    <input
+                      type="email"
+                      class="form-control form-control-user"
+                      id="exampleInputEmail"
+                      aria-describedby="emailHelp"
+                      placeholder="Ingrese Correo Electrónico"
+                      formControlName="mail"
+                      [(ngModel)]="mail"
+                    />
+                    <div
+                      *ngIf="
+                      IniciarSesion.controls['mail'].invalid &&
+                      IniciarSesion.controls['mail'].touched
+                      "
+                      class="alert alert-danger"
+                    >
+                      Campo incorrecto
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="password"
+                      class="form-control form-control-user"
+                      id="exampleInputPassword"
+                      placeholder="Ingrese Contraseña"
+                      formControlName="password"
+                      [(ngModel)]="password"
+                    />
+                    <div
+                      *ngIf="
+                      IniciarSesion.controls['password'].invalid &&
+                      IniciarSesion.controls['password'].touched
+                      "
+                      class="alert alert-danger"
+                    >
+                      Campo incorrecto
+                    </div>
+                  </div>
+
+                  <!-- <div class="form-group">
+                                      <div class="custom-control custom-checkbox small">
+                                          <input type="checkbox" class="custom-control-input" id="customCheck">
+                                          <label class="custom-control-label" for="customCheck">Remember
+                                              Me</label>
+                                      </div>
+                                  </div> -->
+                  <button
+                    href="index.html"
+                    class="btn btn-primary btn-user btn-block"
+                    [disabled]="!IniciarSesion.valid"
+                  >
+                    Login
+                  </button>
+                </form>
+                <hr />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

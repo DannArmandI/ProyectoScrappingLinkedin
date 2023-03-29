@@ -1,0 +1,102 @@
+<!-- <div *ngIf="userService.companyUsers.length!=0" >
+    <div class="col-md-12">
+        <h1>Users</h1>
+        <div>
+            <h3>Descargar todos los usuarios:</h3>
+            <button class="btn btn-primary mr-2" (click)="downloadUsers()">Download</button>
+        </div>
+
+    </div>
+    <h3>Top 10 usuarios más influentes:</h3>
+    <table *ngIf="userService.usersTopTen.length!=0" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Name</th>
+                <th>Job</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userService.usersTopTen">
+                <td>{{userService.usersTopTen.indexOf(user)+1}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.job}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+<div class="container-fluid" >
+  <!-- <div class="row justify-content-md-center" >
+    <mat-form-field appearance="standard">
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese filtro" #input>
+    </mat-form-field>
+  </div> -->
+  <div class="row justify-content-md-center" >
+    <table mat-table [dataSource]="datasource" matSort (matSortChange)="announceSortChange($event)"
+      class="mat-elevation-z8 demo">
+      <!-- Position Column -->
+      <ng-container matColumnDef="id_user" >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id_user" >
+          id Usuario
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.id_user}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+          Nombre Usuario
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Weight Column  -->
+      <ng-container matColumnDef="country">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by country">
+          País
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Rut location">
+          Locación
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="job">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by job">
+          Trabajo Actual
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.job }} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="number_followers">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number_followers">
+          Número Seguidores
+        </th>
+        <td mat-cell *matCellDef="let element"> {{element.number_followers}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="url_user">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by url_user">
+          Url Usuario
+        </th>
+        <td mat-cell *matCellDef="let element"> <a href="{{element.url_user}}" target="_blank">{{element.url_user}} </a>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+    </table>
+  </div>
+</div>
+<!-- <br>
+<div class="row justify-content-md-center">
+  <mat-paginator  [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons>
+  </mat-paginator>
+</div> -->

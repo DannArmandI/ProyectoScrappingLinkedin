@@ -1,0 +1,202 @@
+.cajaPrincipal{
+    margin: 2% 1% 1% 1%;
+}
+
+// table, th, tr, td{
+//     border: 6px solid rgb(162, 240, 229);
+//     text-align: center;
+//     align-items: center;
+//     vertical-align: middle;
+//     border-collapse:collapse;
+// }
+
+// td, input{
+//     background-color: rgb(223, 245, 242);
+// }
+
+// #filaBotones, th, .c{
+//     background-color: rgb(162, 240, 229);
+// }
+// #filaBotones{
+//   background-color: rgba(240, 248, 255, 0);
+// }
+// input {
+//     border-style: hidden;
+// }
+// table{
+//     border-radius: 9px;
+// }
+
+// .edit{
+//     color: #52b788;
+// }
+
+// .delete{
+//     color: #b80a0a;
+// }
+
+// a{
+//     cursor: pointer;
+// }
+
+// .active{
+//     color: #0096c7;
+// }
+
+// .deactivate{
+//     color: #ef233c
+// }
+
+// .switch {
+//     position: relative;
+//     display: inline-block;
+//     width: 30px;
+//     height: 17px;
+//   }
+
+// .switch input {
+//     opacity: 0;
+//     width: 0;
+//     height: 0;
+// }
+
+// .slider {
+//     position: absolute;
+//     cursor: pointer;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+//     background-color: #b80a0a;
+//     -webkit-transition: .4s;
+//     transition: .4s;
+// }
+
+// .slider:before {
+//     position: absolute;
+//     content: "";
+//     height: 13px;
+//     width: 13px;
+//     left: 2px;
+//     bottom: 2px;
+//     background-color: white;
+//     -webkit-transition: .4s;
+//     transition: .4s;
+// }
+// input:checked + .slider {
+//     background-color: #07c700;
+// }
+
+// input:focus + .slider {
+//     box-shadow: 0 0 1px #2196F3;
+// }
+
+// input:checked + .slider:before {
+//     -webkit-transform: translateX(13px);
+//     -ms-transform: translateX(13px);
+//     transform: translateX(13px);
+// }
+
+// .slider.round {
+//     border-radius: 17px;
+// }
+
+// .slider.round:before {
+//     border-radius: 50%;
+// }
+a{
+  cursor: pointer;
+}
+
+
+
+div.row,
+table,
+th,
+input,
+mat-label,
+mat-paginator {
+  font-weight: bolder;
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+
+table {
+  text-align: center !important;
+}
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-cell {
+  padding-right: 1vw;
+}
+
+@media screen and (max-width: 960px) {
+  table {
+    width: 100%;
+  }
+  :host ::ng-deep .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  // tr {
+  //   display: flex;
+  //   flex-direction: column;
+  //   margin: 0px 20px 250px;
+  // }
+
+  .mat-cell {
+    &:first-of-type, &:last-of-type {
+      padding-left: 0px;
+    }
+  }
+  .mat-header-cell{
+    &:last-of-type, &:first-of-type{
+      padding: 0px;
+    }
+  }
+
+  .mat-column-id_plan, 
+  .mat-column-nombre_plan,
+  .mat-column-numero_usuarios,
+  .mat-column-numero_menciones,
+  .mat-column-precio_CLP,
+  .mat-column-precio_USD,
+  .mat-column-cantidad_reportes,
+  .mat-column-porcentaje_descuento,
+  .mat-column-duracion_almacenamiento,
+  .mat-column-created_at,
+  .mat-column-updated_at,
+  .mat-column-estado,
+  .mat-column-acciones{
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    align-items: center;
+    justify-content: center;
+  }
+  .mat-column-acciones{
+    display: flex;
+    flex-direction: row;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+
+  .mat-sort-header{
+    margin-left: 20px;
+  }
+  td.mat-cell:last-of-type{
+    padding: 0;
+  }
+
+  
+
+}

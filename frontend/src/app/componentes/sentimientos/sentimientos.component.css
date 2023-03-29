@@ -1,0 +1,51 @@
+
+.container-chart{
+  height: 80vh;
+  max-height: 80vh;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+  padding-left: 50%;
+  /* border: 1px dashed red; */
+}
+
+/* body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+  
+#chartdiv {
+  width: 100%;
+  height: 250px;
+}
+
+#cajaPrincipal{
+  margin:5%;
+  padding:5%;
+  border-radius: 20px;
+  background-color: rgba(127, 255, 212, 0.349);
+}
+
+.boton{
+  margin:1.5%;
+  background-color: rgba(45, 233, 170, 0.329);
+  padding:2%;
+  border-radius: 13px;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+#cajaSecundaria{
+  padding:4%;
+  background-color: rgba(13, 122, 86, 0.199);
+}
+
+#comodin{
+  padding:2.2%;
+}
+
+#select, #descargasSelect, #companysSelect{
+  background-color: rgba(13, 122, 86, 0.199);
+}
+   */

@@ -1,0 +1,247 @@
+<div class="mostrar">
+  <div class="row p-0 m-0">
+    <div class="col-12 text-right w-100">
+      <a (click)="num = 3; limpiarForm(); title='Agregar Cuenta'" style="cursor: pointer;" *ngIf="num!=2 && num!=3">
+        <i class="fas fa-plus text-primary ">Agregar Cuenta</i>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div class="card border-left-primary" *ngIf="num==2 || num==3">
+
+  <div class="row justify-content-md-center ">
+
+    <div class="col-lg-7 ">
+      <div class="p-5">
+        <div class="text-center">
+          <h1 class="h4 text-gray-900 mb-4">{{title}}</h1>
+        </div>
+        <form class="user" id="Form" #accountForm="ngForm">
+          <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+
+              <div class="col-12 m-0 p-0 position-relative">
+                <input type="hidden" name="id_account" [(ngModel)]="accountService.selectedAccount.id_account">
+                <input type="email" data-toggle="tooltip"  name="user_name" title="Correo usuario linkedin"
+                  class="form-control form-control-user" id="user_name" placeholder="correo usuario linkedin"
+                  [(ngModel)]="accountService.selectedAccount.user_name">
+              </div>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="col-12 m-0 p-0 position-relative">
+                <input type="text" data-toggle="tooltip" title="Contraseña usuario linkedin"
+                  class="form-control form-control-user" id="password" name="password"
+                  placeholder="Contraseña usuario Linkedin" [(ngModel)]="accountService.selectedAccount.password">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-xs-12 mb-2">
+              <button class="btn btn-danger btn-user btn-block " (click)="getAccounts(); num=0">
+                <i class="fas fa-arrow-left"></i>
+                Cancelar
+              </button>
+            </div>
+            <div class="col-md-4 col-xs-12 mb-2">
+              <button class="btn btn-primary btn-user btn-block" (click)="agregarCuenta(accountForm)">
+                <i class="fas fa-check"></i>
+                Guardar
+              </button>
+            </div>
+            <div class="col-md-4 col-xs-12 mb-2">
+              <button class="btn btn-secondary btn-user btn-block" (click)="resetForm(accountForm)">
+                <i class="fas fa-broom"></i>
+                Limpiar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+<div class="row justify-content-md-center m-0" *ngIf="num == 2 || num==3">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="car-body">
+                <form id="Form" #accountForm="ngForm">
+                    <input type="hidden" name="id_account" [(ngModel)]="accountService.selectedAccount.id_account">
+                    <div class="form-group">
+                        <input type="text" name="user_name" class="form-control" placeholder="Enter username"
+                            [(ngModel)]="accountService.selectedAccount.user_name">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" name="password" class="form-control" placeholder="Enter password"
+                            [(ngModel)]="accountService.selectedAccount.password">
+                    </div>
+                    <div class="d-flex justify-content-md-center">
+                        <button class="btn btn-secondary ml-2" (click)="agregarCuenta(accountForm)">
+                            Guardar
+                        </button>
+                        <button class="btn btn-primary ml-5" (click)="resetForm(accountForm)">
+                            Limpiar
+                        </button>
+                        <button class="btn btn-danger ml-5" (click)="getAccounts(); num=0">
+                          Cancelar
+                      </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+<div class="container-fluid">
+  <div class="row justify-content-md-center">
+  <mat-form-field appearance="standard">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese filtro" #input>
+  </mat-form-field>
+  </div>
+  <div class="row justify-content-md-center">
+  <table mat-table [dataSource]="datasource" matSort (matSortChange)="announceSortChange($event)"
+  class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="correo">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by correo">
+      Correo Electrónico
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.user_name}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="password">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by password">
+      Contraseña
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.password}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="estado">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by estado">
+      Estado
+    </th>
+    <td mat-cell *matCellDef="let element"> <span *ngIf="element.Estado == 1; else estado_desactivado">Activo</span>
+      <ng-template #estado_desactivado>
+            <span>Desactivado</span>
+          </ng-template>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="acciones">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+      Acciones
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <button class="btn btn-success btn-icon-split  mr-1" (click)="editAccount(element); title='Editar Cuenta'; num=2;" style="width: fit-content; padding: 0%">
+         <span class="icon text-white-50"><i class="fas fa-user-edit"></i></span>
+         <!-- <span class="text">Editar</span> -->
+      </button>
+      <button *ngIf="element.Estado == 1; else account_desactivado" class="btn btn-info btn-icon-split "
+        (click)="deleteAccount(element.id_account)" style="width: fit-content; padding: 0%">
+        <span class="icon text-white-50"><i class="fas fa-toggle-on"></i></span>
+        <!-- <span class="text">Desactivar</span> -->
+      </button>
+
+      <ng-template #account_desactivado>
+        <button class="btn btn-danger btn-icon-split " (click)="activateAccount(element.id_account)" style="width: fit-content; padding: 0%">
+          <span class="icon text-white-50"><i class="fas fa-toggle-off"></i></span>
+          <!-- <span class="text">Activar</span> -->
+        </button>
+      </ng-template>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  </div>
+</div>
+<br>
+<div class="row justify-content-md-center">
+  <mat-paginator  [pageSizeOptions]="[5, 10, 25, 50, 100]"showFirstLastButtons></mat-paginator>
+</div>
+
+
+
+
+
+
+<!--
+<div class="row justify-content-md-center">
+  <div class="col-m-8">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Correo</th>
+          <th>Contrasena</th>
+          <th>Estado</th>
+          <th>Operacion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let account of accountService.accounts">
+          <td>{{ account.user_name }}</td>
+          <td>{{ account.password }}</td>
+          <td *ngIf="account.Estado == 1; else estado_desactivado">Activo</td>
+          <td>
+            <button class="btn btn-success btn-icon-split p-1 mr-1" (click)="editAccount(account); title='Editar Cuenta'; num=2;">
+              <i class="fas fa-user-edit"></i>Editar
+            </button>
+            <button *ngIf="account.Estado == 1; else account_desactivado" class="btn btn-info btn-icon-split p-1"
+              (click)="deleteAccount(account.id_account)">
+              <i class="fas fa-toggle-on"></i>Desactivar
+            </button>
+          </td>
+          <ng-template #estado_desactivado>
+            <td>Desactivado</td>
+          </ng-template>
+          <ng-template #account_desactivado>
+            <button class="btn btn-danger btn-icon-split p-1" (click)="activateAccount(account.id_account)">
+              <i class="fas fa-toggle-off"></i>Activar
+            </button>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>  -->

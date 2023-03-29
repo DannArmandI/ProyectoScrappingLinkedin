@@ -1,0 +1,68 @@
+
+
+
+<div class="card border-left-primary">
+
+    <div class="row justify-content-md-center ">
+
+        <div class="col-lg-7 ">
+            <div class="p-5">
+                <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Cambiar Contraseña</h1>
+                </div>
+                <form class="user">
+
+                    <div class="form-group row">
+                        <div class="col-sm-12 mb-3 mb-sm-0">
+                            <div class="col-12 m-0 p-0 position-relative">
+                                <input type="password" name="pasword actual" data-toggle="tooltip" title="Contraseña Actual" 
+                                     class="form-control form-control-user"
+                                     placeholder="Contraseña Actual"
+                                     [(ngModel)]="passwordActual">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <div class="col-12 m-0 p-0 position-relative">
+                                <input type="password"  name="pasword nueva" data-toggle="tooltip" title="Nueva Contraseña" 
+                                     class="form-control form-control-user"
+                                     placeholder="Nueva Contraseña"
+                                     [(ngModel)]="newPassword">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <div class="col-12 m-0 p-0 position-relative">
+                                <input type="password"  name="pasword nueva confirmacion" data-toggle="tooltip" title="Confirmar Nueva Contraseña"
+                                    f class="form-control form-control-user" 
+                                    placeholder="Confirmar Nueva Contraseña"
+                                    [(ngModel)]="newPasswordConfirm">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-user btn-block"
+                    (click)="updatePassword()">
+                        <i class="fas fa-check"></i>
+                        Cambiar Contraseña
+                    </button>
+                    <button class="btn btn-danger btn-user btn-block " (click)="menuPrincipal()">
+                        <i class="fas fa-arrow-left"></i>
+                        Cancelar
+                    </button>
+                    <!-- <button class="botonListo" (click)="
+                mostrarMetodos('mostrar'); agregarClienteTipo2(nuevoCliente)
+              ">
+                <mat-icon>check_circle</mat-icon>
+          </button>
+          <a class="botonCancelar" (click)="mostrarMetodos('mostrar')" disabled="true">
+            <mat-icon>cancel</mat-icon>
+          </a> -->
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+

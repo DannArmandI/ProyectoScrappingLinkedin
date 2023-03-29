@@ -1,0 +1,371 @@
+<!-- <nav class="navbar navbar-light bg-light" style="margin-top: 25px;">
+    <form class="container-fluid">
+      <div class="input-group">
+        <span class="input-group-text" id="basic-addon1">Company Username</span>
+        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+        <button>Save</button>
+      </div>
+    </form>
+  </nav> -->
+<div class="mostrar">
+  <div class="row p-0 m-0">
+    <div class="col-12 text-right w-100">
+      <a
+        (click)="num = 2; title = 'Agregar Compañia linkedin'"
+        style="cursor: pointer"
+        *ngIf="num != 2"
+      >
+        <i class="fas fa-plus text-primary">Agregar Compañia</i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="card border-left-primary" *ngIf="num == 2">
+  <div class="row justify-content-md-center">
+    <div class="col-lg-7">
+      <div class="p-5">
+        <div class="text-center">
+          <h1 class="h4 text-gray-900 mb-4">{{ title }}</h1>
+        </div>
+        <form class="user" #extractionForm="ngForm">
+          <input
+            type="hidden"
+            name="id_extraction"
+            [(ngModel)]="extractionService.selectedExtraction.id_extraction"
+          />
+          <input
+            type="hidden"
+            name="creation_date"
+            [(ngModel)]="extractionService.selectedExtraction.creation_date"
+          />
+
+          <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="col-12 m-0 p-0 position-relative">
+                <input
+                  type="email"
+                  name="user_name"
+                  data-toggle="tooltip"
+                  name="user_name"
+                  title="Nombre Compañia linkedin"
+                  class="form-control form-control-user"
+                  id="user_name"
+                  placeholder="Nombre Compañia"
+                  [(ngModel)]="Aux.name_company"
+                />
+              </div>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="col-12 m-0 p-0 position-relative">
+                <input
+                  type="text"
+                  name="url"
+                  data-toggle="tooltip"
+                  title="Url Posts Compañia"
+                  class="form-control form-control-user"
+                  id="url"
+                  name="url"
+                  placeholder="Url Posts Compañia"
+                  [(ngModel)]="Aux.url_Company"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-xs-12 mb-2">
+              <button
+                class="btn btn-danger btn-user btn-block"
+                (click)="num = 0"
+              >
+                <i class="fas fa-arrow-left"></i>
+                Cancelar
+              </button>
+            </div>
+            <div class="col-md-4 col-xs-12 mb-2">
+              <button
+                class="btn btn-primary btn-user btn-block"
+                (click)="addExtraction(extractionForm)"
+              >
+                <i class="fas fa-check"></i>
+                Guardar
+              </button>
+            </div>
+            <div class="col-md-4 col-xs-12 mb-2">
+              <button
+                class="btn btn-secondary btn-user btn-block"
+                (click)="resertForm(extractionForm)"
+              >
+                <i class="fas fa-broom"></i>
+                Limpiar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+<div class="row justify-content-md-center m-0" *ngIf="num == 2">
+  <div class="col-md-4">
+    <div class="card">
+      <div class="car-body">
+        <form #extractionForm="ngForm">
+          <input type="hidden" name="id_extraction" [(ngModel)]="extractionService.selectedExtraction.id_extraction" />
+          <input type="hidden" name="creation_date" [(ngModel)]="extractionService.selectedExtraction.creation_date" />
+          <div class="form-group">
+            <input type="text" name="user_name" class="form-control" placeholder="Enter username"
+              [(ngModel)]="Aux.name_company" />
+          </div>
+          <div class="form-group">
+            <input type="text" name="url" class="form-control" placeholder="Enter Url" [(ngModel)]="Aux.url_Company" />
+          </div>
+          <br />
+          <div class="d-flex justify-content-md-center">
+            <button class="btn btn-secondary ml-2" (click)="addExtraction(extractionForm)">
+              Guardar
+            </button>
+            <button class="btn btn-primary ml-5" (click)="resertForm(extractionForm)">
+              Limpiar
+            </button>
+            <button class="btn btn-danger ml-5" (click)="num=0">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+
+
+<div class="container-fluid" *ngIf="num == 0">
+  <div class="row justify-content-md-center">
+    <mat-form-field appearance="standard">
+      <mat-label>Buscar</mat-label>
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Ingrese filtro"
+        #input
+      />
+    </mat-form-field>
+  </div>
+  <div class="row justify-content-md-center">
+    <table
+      mat-table
+      [dataSource]="datasource"
+      matSort
+      (matSortChange)="announceSortChange($event)"
+      class="mat-elevation-z8"
+    >
+      <!-- Position Column -->
+      <ng-container matColumnDef="name_company">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by name_company"
+        >
+          Nombre Compañia
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.name_company }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="followers">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by followers"
+        >
+          Seguidores
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.followers }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="url_Company">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by url_Company"
+        >
+          Url
+        </th>
+        <td mat-cell *matCellDef="let element"><a href="{{element.url_Company}}" target="_blank">{{ element.url_Company }}</a></td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="date">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Rut date"
+        >
+          Fecha creación
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.date | date: 'YYYY-MM-dd' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Estado">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by Estado"
+        >
+          Estado
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.Estado == 1; else desactivo">Activo</span>
+          <ng-template #desactivo>
+            <span>Desactivado</span>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by symbol"
+        >
+          Acciones
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            class="btn btn-success btn-icon-split mr-1"
+            (click)="
+              editExtraction(element);
+              num = 2;
+              title = 'Editar Compañia linkedin'
+            "
+            style="width: fit-content; padding: 0%"
+          >
+            <span class="icon text-white-50"><i class="fas fa-pen"></i></span>
+            <!-- <span class="text">Editar</span> -->
+          </button>
+          <button
+            *ngIf="element.Estado == 1; else btn_desactivado"
+            class="btn btn-info btn-icon-split mr-1"
+            style="width: fit-content; padding: 0%"
+            (click)="deleteExtraction(element.id_company)"
+          >
+            <span class="icon text-white-50"
+              ><i class="fas fa-toggle-on"></i
+            ></span>
+            <!-- <span class="text">Desactivar</span> -->
+          </button>
+          <button
+            type="button"
+            class="btn btn-warning btn-icon-split"
+            style="color: var(--white)"
+            [routerLink]="['/Panel/Descargas/', element.id_company]"
+            style="width: fit-content; padding: 0%"
+          >
+            <span class="icon text-white-50">
+              <i class="fas fa-folder-plus"></i
+            ></span>
+            <!-- <span class="text">Descargas</span> -->
+          </button>
+          <ng-template #btn_desactivado>
+            <button
+              class="btn btn-danger btn-icon-split"
+              (click)="activateExtraction(element.id_company)"
+              style="width: fit-content; padding: 0%"
+            >
+              <span class="icon text-white-50">
+                <i class="fas fa-toggle-off"></i
+              ></span>
+              <!-- <span class="text">Activar</span> -->
+            </button>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+<br>
+<div class="row justify-content-md-center">
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 25, 50, 100]"
+  showFirstLastButtons
+></mat-paginator>
+</div>
+
+<!-- <div class="row justify-content-md-center">
+  <div class="col-m-8">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Followers</th>
+          <th>Url</th>
+          <!-- <th>Last Update</th> -->
+<!-- <th>Creation Date</th>
+          <th>Estado</th>
+          <th>Operations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let extraction of listaCompanies">
+          <td>{{ extraction.name_company }}</td>
+          <td>{{ extraction.followers }}</td>
+          <td>{{ extraction.url_Company }}</td> -->
+<!-- <td>{{ extraction.last_update }}</td> -->
+<!-- <td>{{ extraction.date | date: "dd-MM-yyyy" }}</td>
+          <td *ngIf="extraction.Estado == 1; else desactivo">Activo</td>
+          <td>
+            <button class="btn btn-success btn-icon-split p-1 mr-1"
+              (click)="editExtraction(extraction); num=2; title='Editar Compañia linkedin'">
+              <i class="fas fa-pen"></i>Editar
+            </button>
+            <button *ngIf="extraction.Estado == 1; else btn_desactivado" class="btn btn-info btn-icon-split p-1 mr-1"
+              (click)="deleteExtraction(extraction.id_company)">
+              <i class="fas fa-toggle-on"></i>Desactivar
+            </button>
+            <button type="button" class="btn btn-warning p-1" style="color: var(--white); "
+              [routerLink]="['/Panel/Descargas/', extraction.id_company]">
+              <i class="fas fa-folder-plus"></i><span class="text ">Descargas</span>
+            </button> -->
+<!-- <button *ngIf="extraction.priority!=1" class="btn btn-danger btn-sm" (click)="increasePriority(extraction)">
+                            <span class="material-icons">
+                                arrow_circle_up
+                            </span>
+                        </button>
+                        <button *ngIf="extraction.priority!=this.extractionService.extractions.length" class="btn btn-danger btn-sm" (click)="decreasePriority(extraction)">
+                            <span class="material-icons">
+                                arrow_circle_down
+                            </span>
+                        </button> -->
+<!-- </td>
+          <ng-template #desactivo>
+            <td>Desactivado</td>
+          </ng-template>
+
+          <ng-template #btn_desactivado>
+            <button class="btn btn-danger btn-icon-split p-1" (click)="activateExtraction(extraction.id_company)">
+              <i class="fas fa-toggle-off"></i>Activar
+            </button>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->

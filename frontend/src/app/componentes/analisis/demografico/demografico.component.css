@@ -1,0 +1,14 @@
+
+
+.container-chart{
+    height: 80vh;
+    max-height: 80vh;
+}
+input[type=date]::-webkit-calendar-picker-indicator {
+    padding-left: 50%;
+    /* border: 1px dashed red; */
+}
+
+.colapsar-tam{
+    height: 50%;
+}

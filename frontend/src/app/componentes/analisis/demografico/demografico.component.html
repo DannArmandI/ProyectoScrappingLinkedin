@@ -1,0 +1,130 @@
+
+<div class="d-flex flex-column " class="container-chart">
+
+
+    <div class="card shadow mb-4" >
+        <!-- Card Header - Accordion -->
+        <a id="collapsedLink" href="#collapseCard" class="d-block card-header py-3" data-toggle="collapse" role="button"
+            aria-expanded="true" aria-controls="collapseCard" (click)="colapsar()">
+            <h6 class="m-0 font-weight-bold text-primary">Seleccionar Descarga</h6>
+        </a>
+        <!-- Card Content - Collapse -->
+        <div class="collapse show" id="collapseCard">
+            <div class="card-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <form class="user">
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3">
+                                        <div class="form-group ">
+                                            <label for="FechaDes" class="ml-3">Fecha desde</label>
+                                            
+                                            <input type="Date" name="FechaDes" class="form-control border bg-gradient-light"
+                                                placeholder="Fecha Desde" [(ngModel)]="fecha_desde" />
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-3 mb-3">
+                                        <div class="form-group">
+                                            <label for="FechaHas" class="ml-3">Fecha hasta</label>
+                                            <input type="Date" name="FechaHas" class="form-control border bg-gradient-light"
+                                                placeholder="Fecha Hasta" [(ngModel)]="fecha_hasta" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="companies" class="ml-3">Empresa</label>
+                                        <select id="companies" class="form-control border bg-gradient-light" name="compañias" 
+                                            (change)="cambiarSelectCompany()" [(ngModel)]="idCompanySelect">
+                                            <option value="default">Seleccione una empresa</option>
+                                            <option *ngFor="let company of arrayCompany" value="{{company.id_company}}">
+                                                {{company.name_company}}</option>
+                                        </select>
+                                    </div>
+    
+                                    <div class="col-md-3 mb-3">
+                                        <label for="downloads" class="ml-3">Descarga</label>
+                                        <select id="downloads" class="form-control border bg-gradient-light" name="descargas"
+                                            (change)="cambiarSelect()" [(ngModel)]="idDescargaSelect">
+                                            <option value="default">Seleccione una descarga</option>
+                                            <option *ngFor="let descarga of arrayDescarga" value="{{descarga.id_descarga}}">
+                                                Rango fecha descarga: {{descarga.Fecha_Des | date:'d-MM-yyyy'}} -
+                                                {{descarga.Fecha_Has | date:'d-MM-yyyy'}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+    
+                                <!-- <div class="form-row">
+                                  <div class="col-md-6 mb-3">
+                                    <label for="validationDefault03">City</label>
+                                    <input type="text" class="form-control" id="validationDefault03" placeholder="City" required>
+                                  </div>
+                                  <div class="col-md-3 mb-3">
+                                    <label for="validationDefault04">State</label>
+                                    <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
+                                  </div>
+                                  <div class="col-md-3 mb-3">
+                                    <label for="validationDefault05">Zip</label>
+                                    <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
+                                  </div>
+                                </div> -->
+                                <nav class="navbar navbar-expand navbar-light bg-light mb-4" style="visibility: hidden;" id="navBtnCharts">
+    
+                                    <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Reacciones
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right animated--grow-in"
+                                                aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" (click)="changeOption(1)">Instituciones</a>
+                                                <a class="dropdown-item" (click)="changeOption(2)">título formación
+                                                    profesional</a>
+                                                <a class="dropdown-item" (click)="changeOption(3)">País</a>
+                                                <a class="dropdown-item" (click)="changeOption(4)">Locación</a>
+                                                <a class="dropdown-item" (click)="changeOption(5)">Empresa</a>
+                                                <a class="dropdown-item" (click)="changeOption(6)">Cargo</a>
+    
+                                            </div>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Comentarios
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right animated--grow-in"
+                                                aria-labelledby="navbarDropdown">
+                                                <a class="dropdown-item" (click)="changeOption(7)">Instituciones</a>
+                                                <a class="dropdown-item" (click)="changeOption(8)">título formación
+                                                    profesional</a>
+                                                <a class="dropdown-item" (click)="changeOption(9)">País</a>
+                                                <a class="dropdown-item" (click)="changeOption(10)">Locación</a>
+                                                <a class="dropdown-item" (click)="changeOption(11)">Empresa</a>
+                                                <a class="dropdown-item" (click)="changeOption(12)">Cargo</a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </nav>
+    
+                                <div class="col text-center">
+                                    <button class="btn btn-primary " (click)="validacion()">
+                                        Confirmar
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="card mb-4  py-3 border-left-primary text-primary pb-5 text-right" id="divChart" style="height:60%;" *ngIf="flagChart == true">
+        <h1 class="mb-2 mr-5">{{tittleGrafico}}</h1>
+        <div id="chartdiv" style="width: 100%; height:100%; visibility: hidden;"></div>
+    </div>
+    
+
+</div>

@@ -1,0 +1,137 @@
+<div class="container-fluid">
+  <div class="row justify-content-md-center">
+    <mat-form-field appearance="standard">
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese filtro" #input>
+    </mat-form-field>
+  </div>
+  <div class="row justify-content-md-center">
+    <table
+      mat-table
+      [dataSource]="datasource"
+      matSort
+      (matSortChange)="announceSortChange($event)"
+      class="mat-elevation-z8"
+    >
+      <!-- Position Column -->
+      <ng-container matColumnDef="id_reaction">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by id_reaction"
+        >
+          Id Reacción
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.id_reaction }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by name"
+        >
+        Nombre
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Weight Column  -->
+      <!-- <ng-container matColumnDef="job">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by job"
+        >
+        Job
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.job }}</td>
+      </ng-container> -->
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="reaction">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by reaction"
+        >
+        Reacción
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.reaction}}</td>
+      </ng-container>
+      <!-- <ng-container matColumnDef="id_user">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by id_user"
+        >
+        id_user
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.id_user}}
+        </td>
+      </ng-container> -->
+      <ng-container matColumnDef="acciones">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          mat-sort-header
+          sortActionDescription="Sort by symbol"
+        >
+          Acciones
+        </th>
+        <td mat-cell *matCellDef="let element">
+
+
+          <button class="btn btn-warning btn-icon-split "
+          style="width: fit-content; padding: 0%" [routerLink]="['/Panel/Descargas/Elementos/user/',element.id_user]" routerLinkActive="router-link-active" >
+            <span class="icon text-white-50"> <i class="fas fa-user"></i> </span>
+            <!-- <span class="text">Desactivar</span> -->
+          </button>
+
+
+
+
+
+
+
+          <!-- <button
+            class="btn btn-success btn-icon-split mr-1"
+            style="width: fit-content; padding: 0%"
+            [routerLink]="['/Panel/Descargas/Elementos/Posts', element.id_post]"
+            routerLinkActive="router-link-active"
+          >
+            <span class="icon text-white-50"
+              ><i class="fas fa-user-edit"></i
+            ></span>
+            <!-- <span class="tex">Comentarios</span> -->
+            <!-- <span class="text">Editar</span> -->
+          <!-- </button>
+
+          <button
+            class="btn btn-warning btn-icon-split mr-1"
+            style="width: fit-content; padding: 0%"
+          >
+            <span class="icon text-white-50"
+              ><i class="fas fa-user-edit"></i
+            ></span> -->
+            <!-- <span class="tex">Reacciones</span> -->
+            <!-- <span class="text">Editar</span> -->
+          <!-- </button> -->
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+<br>
+<div class="row justify-content-md-center">
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>

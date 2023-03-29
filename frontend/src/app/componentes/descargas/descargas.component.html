@@ -1,0 +1,306 @@
+<div class="mostrar">
+  <div class="row p-0 m-0">
+    <div class="col-12 text-right w-100">
+      <a (click)="num=2; title='Agregar Descarga';limpiar();" *ngIf="num!=2;" style="cursor: pointer;"><i
+          class="fas fa-plus text-primary ">Agregar Descarga</i></a>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="card border-left-primary" *ngIf="num==2">
+
+  <div class="row justify-content-md-center ">
+
+    <div class="col-lg-7 ">
+      <div class="p-5">
+        <div class="text-center">
+          <h1 class="h4 text-gray-900 mb-4">{{title}}</h1>
+        </div>
+        <form class="user" id="Form" #DescargaForm="ngForm">
+
+          <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+
+              <div class="col-12 m-0 p-0">
+                <label class="col-form-label-sm col-form-label ml-3" for="FechaDes">Fecha Inicio
+                  Descarga:</label>
+
+                <input type="date" data-toggle="tooltip" title="Fecha Inicio descarga" name="FechaDes"
+                  class="form-control form-control-user" id="FechaDes" placeholder="fecha inicio descarga"
+                  [ngModel]="Aux2.Fecha_Des | date:'yyyy-MM-dd' : 'UTC'" (ngModelChange)="Aux2.Fecha_Des = $event">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label class="col-form-label-sm col-form-label ml-3" for="FechaHas">Fecha Fin Descarga:</label>
+
+              <input type="date" data-toggle="tooltip" title="Fecha Fin descarga"
+                [ngModel]="Aux2.Fecha_Has | date:'yyyy-MM-dd' : 'UTC'" (ngModelChange)="Aux2.Fecha_Has = $event"
+                class="form-control form-control-user" id="FechaHas" name="FechaHas" placeholder="fecha fin descarga">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-xs-12 mb-2">
+              <button class="btn btn-danger btn-user btn-block " (click)="num=0">
+                <i class="fas fa-arrow-left"></i>
+                Cancelar
+              </button>
+            </div>
+            <div class="col-md-4 col-xs-12 mb-2">
+              <button class="btn btn-primary btn-user btn-block" (click)="AddDescarga(DescargaForm)">
+                <i class="fas fa-check"></i>
+                Guardar
+              </button>
+            </div>
+            <div class="col-md-4 col-xs-12 mb-2">
+              <button class="btn btn-secondary btn-user btn-block" (click)="resertForm(DescargaForm)">
+                <i class="fas fa-broom"></i>
+                Limpiar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+<!-- <div class="row justify-content-md-center" *ngIf="num==2">
+
+  <div class="col-m-8">
+    <div class="card">
+      <div class="car-body"> -->
+<!-- <form #extractionForm="ngForm" (ngSubmit)="addExtraction(extractionForm)"> -->
+<!-- <form #DescargaForm="ngForm">
+          <input type="hidden" name="id_company" [(ngModel)]="company" />
+          <input
+            type="hidden"
+            name="creation_date"
+            [(ngModel)]="extractionService.selectedExtraction.creation_date"
+          />
+          <div class="form-group">
+            <label for="FechaDes">{{ label1 }}</label>
+            <input
+              type="Date"
+              name="FechaDes"
+              class="form-control"
+              placeholder="Fecha Desde"
+              [(ngModel)]="Aux2.Fecha_Des"
+            />
+          </div>
+          <div class="form-group">
+            <label for="FechaHas">{{ label2 }}</label>
+            <input
+              type="Date"
+              name="FechaHas"
+              class="form-control"
+              placeholder="Fecha Hasta"
+              [(ngModel)]="Aux2.Fecha_Has"
+            />
+          </div>
+          <br />
+          <div class="d-flex justify-content-md-center">
+            <button
+              class="btn btn-secondary ml-2"
+              (click)="AddDescarga(DescargaForm)"
+            >
+              Guardar
+            </button>
+            <button
+              class="btn btn-primary ml-5"
+              (click)="resertForm(DescargaForm)"
+            >
+              Limpiar
+            </button>
+            <button
+              class="btn btn-danger ml-5"
+              (click)="num=0"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div> -->
+<div class="container-fluid">
+  <div class="row justify-content-md-center">
+  <mat-form-field appearance="standard">
+    <mat-label>Buscar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese filtro" #input>
+  </mat-form-field>
+  </div>
+  <div class="row justify-content-md-center">
+  <table mat-table [dataSource]="datasource" matSort (matSortChange)="announceSortChange($event)"
+    class="mat-elevation-z8">
+    <!-- Position Column -->
+    <ng-container matColumnDef="id_descarga">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id_descarga">
+        id Descarga
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.id_descarga}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="fecha_desde">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by fecha_desde">
+        Fecha Desde
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.Fecha_Des | date: 'YYYY-MM-dd'}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="fecha_hasta">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by fecha_hasta">
+        Fecha Hasta
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.Fecha_Has | date: 'YYYY-MM-dd'}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="fecha_creacion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Rut fecha_creacion">
+        Fecha Creación
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.Fecha_Cre | date: 'YYYY-MM-dd'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha_actualizacion">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by fecha_actualizacion">
+        Fecha Actualizacion
+      </th>
+      <td mat-cell *matCellDef="let element"> {{element.Fecha_Act | date: 'YYYY-MM-dd'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by estado">
+        Estado
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngIf="element.Estado == 1; else estado_desactivado">Activo</span>
+        <ng-template #estado_desactivado>
+      <span>Desactivado</span>
+      </ng-template>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+        Acciones
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <button class="btn btn-success btn-icon-split  mr-1" (click)="editDownload(element); num=2" style="width: fit-content; padding: 0%">
+          <span class="icon text-white-50"><i class="fas fa-user-edit"></i></span>
+          <!-- <span class="text">Editar</span> -->
+        </button>
+
+        <button *ngIf="element.Estado == 1; else descarga_desactivado" class="btn btn-info btn-icon-split mr-1 "
+          (click)="deleteDescarga(element.id_descarga,element.Running)"style="width: fit-content; padding: 0%">
+          <span class="icon text-white-50"> <i class="fas fa-toggle-on"></i> </span>
+          <!-- <span class="text">Desactivar</span> -->
+        </button>
+        <button class="btn btn-warning btn-icon-split "
+        style="width: fit-content; padding: 0%" [routerLink]="['/Panel/Descargas/Elementos/',element.id_descarga]" routerLinkActive="router-link-active" >
+          <span class="icon text-white-50"> <i class="fa fa-folder-open"></i> </span>
+          <!-- <span class="text">Desactivar</span> -->
+        </button>
+        <ng-template #descarga_desactivado>
+          <button class="btn btn-danger btn-icon-split " (click)="activateDescarga(element.id_descarga)" style="width: fit-content; padding: 0%">
+            <span class="icon text-white-50">
+              <i class="fas fa-toggle-off"></i>
+            </span>
+            <!-- <span class="text">Activar</span> -->
+          </button>
+        </ng-template>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  </div>
+</div>
+<br>
+<div class="row justify-content-md-center">
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
+</div>
+
+
+
+
+
+
+
+
+<!-- <div class="row justify-content-md-center">
+  <div class="col-m-8">
+    <table table class="table table-bordered" id="dataTable" cellspacing="0">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Fecha Desde</th>
+          <th>Last Update</th> -->
+          <!-- <th>Fecha Hasta</th>
+          <th>Fecha Creacion</th>
+          <th>Fecha Actualizacion</th>
+          <th>Estado</th>
+          <th>Operations</th>
+        </tr>
+      </thead>
+      <tbody> -->
+        <!-- <tr *ngFor="let download of listaDownloads">
+          <td>{{ download.id_descarga }}</td>
+          <td>{{ download.Fecha_Des | date: "dd-MM-yyyy" }}</td> -->
+          <!-- <td>{{ extraction.last_update }}</td> -->
+          <!-- <td>{{ download.Fecha_Has | date: "dd-MM-yyyy" }}</td>
+          <td>{{ download.Fecha_Cre | date: "dd-MM-yyyy" }}</td>
+          <td>{{ download.Fecha_Act | date: "dd-MM-yyyy" }}</td>
+          <td *ngIf="download.Estado == 1; else estado_desactivado">Activo</td>
+          <td>
+            <button class="btn btn-success btn-icon-split p-1 mr-1" (click)="editDownload(download); num=2">
+              <i class="fas fa-user-edit"></i>Editar
+            </button>
+
+            <button *ngIf="download.Estado == 1; else descarga_desactivado" class="btn btn-info btn-icon-split p-1"
+              (click)="deleteDescarga(download.id_descarga)">
+              <i class="fas fa-toggle-on"></i>Desactivar
+            </button> -->
+
+            <!-- <button
+              class="btn btn-danger btn-sm"
+              (click)="deleteDescarga(download.id_descarga)"
+            >
+              <i class="material-icons">delete</i>
+            </button> -->
+            <!-- <button *ngIf="extraction.priority!=1" class="btn btn-danger btn-sm" (click)="increasePriority(extraction)">
+                            <span class="material-icons">
+                                arrow_circle_up
+                            </span>
+                        </button>
+                        <button *ngIf="extraction.priority!=this.extractionService.extractions.length" class="btn btn-danger btn-sm" (click)="decreasePriority(extraction)">
+                            <span class="material-icons">
+                                arrow_circle_down
+                            </span>
+                        </button> -->
+          <!-- </td>
+          <ng-template #estado_desactivado>
+            <td>Desactivado</td>
+          </ng-template>
+          <ng-template #descarga_desactivado>
+            <button class="btn btn-danger btn-icon-split p-1" (click)="activateDescarga(download.id_descarga)">
+              <i class="fas fa-toggle-off"></i>Activar
+            </button>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div> -->

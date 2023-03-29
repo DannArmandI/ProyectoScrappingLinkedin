@@ -1,0 +1,315 @@
+
+
+<div class="d-flex flex-column " class="container-chart">
+<div class="card shadow mb-4">
+    <!-- Card Header - Accordion -->
+    <a id="collapsedLink" href="#collapseCard" class="d-block card-header py-3" data-toggle="collapse" role="button"
+        aria-expanded="true" aria-controls="collapseCard" (click)="colapsar()">
+        <h6 class="m-0 font-weight-bold text-primary">Seleccionar Descarga</h6>
+    </a>
+
+
+
+    <!-- Card Content - Collapse -->
+    <div class="collapse show" id="collapseCard">
+        <div class="card-body">
+
+
+            <div class="container-fluid ">
+                <div class="row">
+                    <div class="col-12">
+                        <form class="user">
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-group ">
+                                        <label for="FechaDes" class="ml-3">Fecha desde</label>
+                                        <input id="FechaDes" type="Date" name="FechaDes" class="form-control border bg-gradient-light"
+                                            placeholder="Fecha Desde" [(ngModel)]="fecha_desde" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="FechaHas" class="ml-3">Fecha hasta</label>
+                                        <input id="FechaHas" type="Date" name="FechaHas" class="form-control border bg-gradient-light"
+                                            placeholder="Fecha Hasta" [(ngModel)]="fecha_hasta" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label for="companysSelect1" class="ml-3">Empresa 1:</label>
+                                    <select id="companysSelect1" class="form-control border bg-gradient-light"  name="compañias" (change)="cambiarSelectCompany()" [(ngModel)]="idCompanySelect1" >
+                                        <option value="default">Seleccione una empresa</option>
+                                        <option *ngFor="let company of arrayCompany" value="{{company.id_company}}" >{{company.name_company}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label for="descargasSelect1" class="ml-3">Descarga 1:</label>
+                                    <select id="descargasSelect1" class="form-control border bg-gradient-light" name="descargas1" (change)="cambiarSelect1($event)" [(ngModel)]="idDescargaSelect1" >
+                                        <option value="default">Seleccione una descarga</option>
+                                        <option *ngFor="let descarga of arrayDescarga1"  value="{{descarga.id_descarga}}" >Rango fecha descarga: {{descarga.Fecha_Des | date:'d-MM-yyyy'}} - {{descarga.Fecha_Has | date:'d-MM-yyyy'}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label for="companysSelect2" class="ml-3">Empresa 2:</label>
+                                    <select id="companysSelect2" class="form-control border bg-gradient-light"  name="compañias" (change)="cambiarSelectCompany2()" [(ngModel)]="idCompanySelect2" >
+                                        <option value="default">Seleccione una empresa</option>
+                                        <option *ngFor="let company of arrayCompany" value="{{company.id_company}}" >{{company.name_company}}</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label for="descargasSelect2" class="ml-3">Descarga 2:</label>
+                                    <select id="descargasSelect2" class="form-control border bg-gradient-light" name="descargas2" (change)="cambiarSelect2($event)" [(ngModel)]="idDescargaSelect2" >
+                                        <option value="default">Seleccione una descarga</option>
+                                        <option *ngFor="let descarga of arrayDescarga2"  value="{{descarga.id_descarga}}">Rango fecha descarga: {{descarga.Fecha_Des | date:'d-MM-yyyy'}} - {{descarga.Fecha_Has | date:'d-MM-yyyy'}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-row">
+                              <div class="col-md-6 mb-3">
+                                <label for="validationDefault03">City</label>
+                                <input type="text" class="form-control" id="validationDefault03" placeholder="City" required>
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <label for="validationDefault04">State</label>
+                                <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
+                              </div>
+                              <div class="col-md-3 mb-3">
+                                <label for="validationDefault05">Zip</label>
+                                <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
+                              </div>
+                            </div> -->
+
+
+                            <nav class="navbar navbar-expand navbar-light bg-light mb-4" style="visibility: hidden;" id="navBtnCharts">
+
+                                <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Reacciones
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right animated--grow-in"
+                                            aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" (click)="changeOption(1)">Instituciones</a>
+                                            <a class="dropdown-item" (click)="changeOption(2)">título formación profesional</a>
+                                            <a class="dropdown-item" (click)="changeOption(3)">País</a>
+                                            <a class="dropdown-item" (click)="changeOption(4)">Locación</a>
+                                            <a class="dropdown-item" (click)="changeOption(5)">Empresa</a>
+                                            <a class="dropdown-item" (click)="changeOption(6)">Cargo</a>
+                                        </div>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Comentarios
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right animated--grow-in"
+                                            aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" (click)="changeOption(7)">Instituciones</a>
+                                            <a class="dropdown-item" (click)="changeOption(8)">título formación
+                                                profesional</a>
+                                            <a class="dropdown-item" (click)="changeOption(9)">País</a>
+                                            <a class="dropdown-item" (click)="changeOption(10)">Locación</a>
+                                            <a class="dropdown-item" (click)="changeOption(11)">Empresa</a>
+                                            <a class="dropdown-item" (click)="changeOption(12)">Cargo</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </nav>
+
+                            <div class="col text-center">
+                                <button class="btn btn-primary " (click)="validacion()">
+                                    Confirmar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="col-12 mt-2 " style="height: 58%;" id="divChart">
+    <div class="row" style="height: 100%;">
+        <div class="card mb-4   py-3 border-left-primary col-6">
+            <div class="col-12 " style="height: 100%;">
+                <div id="chartdiv4" style="width: 100%; height: 100%"></div>
+            </div>
+        </div>
+
+        <div class="card mb-4  py-3 border-left-primary col-6">
+            <div class="col-12" style="height: 100%;">
+                <div id="chartdiv5" style="width: 100%; height: 100%"></div></div>
+        </div>
+    </div>
+</div> -->
+
+<div class="card mb-4  py-3  text-primary pb-5 text-right" id="divChart" style="height:50%;" >
+    <div class="col-12" >
+        <div class="row mb-1" style="height: 10%;">
+            <div class="col-6"><h2>{{titleString1}}</h2></div>
+            <div class="col-6"><h2>{{titleString2}}</h2></div>
+        </div>
+        <div class="row" style="height: 85%;" id="rowChart">
+            <div class="col-xs-12 col-sm-6">
+                <div id="chartdiv4" style="width: 100%; height:100%; visibility: hidden;"></div>
+            </div>
+    
+        
+            <div class="col-xs-12 col-sm-6 border-left-primary">
+                <div id="chartdiv5" style="width: 100%; height:100%; visibility: hidden;"></div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div id="cajaPrincipal" class="container-fluid vh-85">
+    <h1>Analisis de competencia</h1>
+    <p>A continuacion podra ver el grafico que representa el rendimiento comparativo de las publicaciones incluidas en la descarga seleccionada de acuerdo al rango de fecha indicado.</p>
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-6">
+                    <h3>Rango de descarga</h3>
+                    <div class="row">
+                        <form #DescargaForm="ngForm" class="form-group row">
+                            
+                            <div class="col-6">
+                                <div class="row">
+                                    <div id="cajaSecundaria" class="col-6">
+                                        <div class="form-group">
+                                            <label for="FechaDes">Fecha de inicio</label>
+                                            <input
+                                                type="Date"
+                                                name="FechaDes"
+                                                class="form-control"
+                                                placeholder="Fecha Desde"
+                                                [(ngModel)]="fecha_desde"
+                                            />
+                                        </div>
+                                        <br><br><br>
+                                    </div> 
+                                    <div id="cajaSecundaria" class="col-6">   
+                                        <div class="form-group">
+                                            <label for="FechaHas">Fecha de termino</label>
+                                            <input
+                                                type="Date"
+                                                name="FechaHas"
+                                                class="form-control"
+                                                placeholder="Fecha Hasta"
+                                                [(ngModel)]="fecha_hasta"
+                                            />
+                                        </div>
+                                        <br><br><br>
+                                    </div>    
+                                </div>  
+                            </div> 
+                            <div class="col-6">
+                                <div class="row">
+                                    <div id="cajaSecundaria" class="col-6">
+                                        <!-- compañias 1-->
+                                        <!-- <label for="compañias">Empresa 1:</label>
+                                        <select id="companysSelect" class="form-select"  name="compañias" (change)="cambiarSelect($event)" [(ngModel)]="idCompanySelect1" >
+                                            <option value="default"></option>
+                                            <option *ngFor="let company of arrayCompany" value="{{company.id_company}}" >{{company.name_company}}</option>
+                                        </select>
+                                    </div>
+                                    <div id="cajaSecundaria" class="col-6">
+                                        <!-- descargas 1-->
+                                        <!-- <label for="descargas">Descarga 1:</label>
+                                        <select id="descargasSelect" class="form-select" name="descargas1" (change)="cambiarSelect($event)" [(ngModel)]="idDescargaSelect1" >
+                                            <option value="default"></option>
+                                            <option *ngFor="let descarga of arrayDescarga1"  value="{{descarga.id_descarga}}" >Rango fecha descarga: {{descarga.Fecha_Des | date:'shortDate'}} - {{descarga.Fecha_Has | date:'shortDate'}}</option>
+                                        </select>
+                                    </div>
+                                    <div id="cajaSecundaria" class="col-6">
+                                        <!-- compañias 2-->
+                                        <!-- <label for="compañias">Empresa 2:</label>
+                                        <select id="companysSelect" class="form-select"  name="compañias" (change)="cambiarSelect($event)" [(ngModel)]="idCompanySelect2" >
+                                            <option value="default"></option>
+                                            <option *ngFor="let company of arrayCompany" value="{{company.id_company}}" >{{company.name_company}}</option>
+                                        </select>
+                                    </div>
+                                    <div id="cajaSecundaria" class="col-6">
+                                        <!-- descargas 2-->
+                                        <!-- <label for="descargas">Descarga 2:</label>
+                                        <select id="descargasSelect" class="form-select" name="descargas2" (change)="cambiarSelect($event)" [(ngModel)]="idDescargaSelect2" >
+                                            <option value="default"></option>
+                                            <option *ngFor="let descarga of arrayDescarga2"  value="{{descarga.id_descarga}}">Rango fecha descarga: {{descarga.Fecha_Des | date:'shortDate'}} - {{descarga.Fecha_Has | date:'shortDate'}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>        
+                        </form>
+                        <br>
+                        <div class="d-flex justify-content-md-center">
+                            <button id="boton" class="btn btn-secondary mr-5" (click)="validacion()"> Confirmar </button>
+                        </div>
+                    </div>
+                </div>
+                 -->
+                <!-- <div class="col-6">
+                    <div class="row" *ngIf="flag==true">
+                        <div class="col-12" >
+                            <h3>Reactions</h3>
+                            <div id="cajaTerciaria" class="btn-group">
+                                <button #btn_1 class="btn" (click)="changeOption(1)">Institución</button>
+                                <button #btn_2 class="btn" (click)="changeOption(2)">Titulo formación profesional</button>
+                                <button #btn_3 class="btn" (click)="changeOption(3)">Pais</button>
+                                <button #btn_3 class="btn" (click)="changeOption(4)">Locación</button>
+                                <button #btn_3 class="btn" (click)="changeOption(5)">Empresa</button>
+                                <button #btn_3 class="btn" (click)="changeOption(6)">Cargo</button>
+                            </div>
+                        </div>
+                        <div class="col-12" >
+                            <h3>Comments</h3>
+                            <div id="cajaTerciaria" class="btn-group mt-5">
+                                <button #btn_1 class="btn" (click)="changeOption(7)">Institución</button>
+                                <button #btn_2 class="btn" (click)="changeOption(8)">Titulo formación profesional</button>
+                                <button #btn_3 class="btn" (click)="changeOption(9)">Pais</button>
+                                <button #btn_3 class="btn" (click)="changeOption(10)">Locación</button>
+                                <button #btn_3 class="btn" (click)="changeOption(11)">Empresa</button>
+                                <button #btn_3 class="btn" (click)="changeOption(12)">Cargo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-2">
+            <div id="chartdiv1" style="width: 100%; height: 70vh"></div>
+            <div id="chartdiv2" style="width: 100%; height: 70vh"></div>
+        </div>
+
+    </div>
+    
+</div> --> 

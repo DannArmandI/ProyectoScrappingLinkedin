@@ -1,0 +1,885 @@
+<div class="mostrar">
+  <div class="row p-0 m-0">
+    <div class="col-12 text-right w-100">
+      <a (click)="nombreMetodo = 'agregar'; newClient()" *ngIf="nombreMetodo == 'mostrar'">
+        <i class="fas fa-plus text-primary">Agregar Cliente</i>
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container-fluid" *ngIf="nombreMetodo == 'mostrar'">
+  <div class="row justify-content-md-center">
+    <mat-form-field appearance="standard">
+      <mat-label>Buscar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese filtro" #input />
+    </mat-form-field>
+  </div>
+  <div class="row justify-content-md-center">
+    <table mat-table [dataSource]="datasource" matSort (matSortChange)="announceSortChange($event)"
+      class="mat-elevation-z8 ">
+      <!-- Position Column -->
+      <ng-container matColumnDef="id_cliente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id_cliente">
+          id
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.id_cliente }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="rut_cliente">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by rut_cliente">
+          Rut Cliente
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.rut_cliente }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="razon_social">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by razon_social">
+          Razón Social
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.razon_social }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="fecha_inicio_contrato">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by Rut fecha_inicio_contrato">
+          Inicio Contrato
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.fecha_inicio_contrato | date: 'YYYY-MM-dd' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fecha_fin_contrato">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by fecha_fin_contrato">
+          Fin Contrato
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.fecha_fin_contrato | date: 'YYYY-MM-dd' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="correo_electronico">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by correo_electronico">
+          Correo Electrónico
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.correo_electronico }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="created_at">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by created_at">
+          Fecha Creación
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.created_at | date: 'YYYY-MM-dd' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="updated_at">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by updated_at">
+          Fecha Actualización
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.updated_at | date: 'YYYY-MM-dd' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="id_plan">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id_plan">
+          Id plan
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.id_plan }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by estado">
+          Estado
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.estado == 1; else desactivo">Activo</span>
+          <ng-template #desactivo>
+            <span>Desactivado</span>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+          Acciones
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <button class="btn btn-success btn-icon-split mr-1" (click)="
+              mostrarMetodos('editar'); mostrarClienteTipo2(element.id_cliente)
+            " style="width: fit-content; padding: 0%">
+            <span class="icon text-white-50"><i class="fas fa-user-edit"></i></span>
+            <!-- <span class="text">Editar</span> -->
+          </button>
+          <button *ngIf="element.estado == 0" class="btn btn-danger btn-icon-split" style="width: 150px"
+            (click)="cambiarEstado(element.id_cliente, element.estado)" style="width: fit-content; padding: 0%">
+            <span class="icon text-white-50"><i class="fas fa-toggle-off"></i></span>
+            <!-- <span class="text">Activar</span> -->
+          </button>
+          <button *ngIf="element.estado == 1" class="btn btn-info btn-icon-split" style="width: 150px"
+            (click)="cambiarEstado(element.id_cliente, element.estado)" checked style="width: fit-content; padding: 0%">
+            <span class="icon text-white-50"><i class="fas fa-toggle-on"></i></span>
+            <!-- <span class="text">Desactivar</span> -->
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>
+<br>
+<div class="row justify-content-md-center">
+  <mat-paginator [hidden]="nombreMetodo != 'mostrar'" [pageSizeOptions]="[5, 10, 25, 50, 100]" showFirstLastButtons>
+  </mat-paginator>
+</div>
+
+<!-- <div class="table-responsive" *ngIf="nombreMetodo == 'mostrar'"> -->
+<!-- <div class="row justify-content-md-center" *ngIf="nombreMetodo=='mostrar'">
+  <div class="col-m-8">
+    <table class="table table-bordered" id="dataTable" cellspacing="0">
+      <thead>
+        <tr id="titulos">
+          <th scope="col">Id</th>
+          <th scope="col">Rut cliente</th>
+          <th scope="col">razon social</th>
+          <th scope="col">Inicio contrato</th>
+          <th scope="col">Fin contrato</th>
+          <th scope="col">Correo Electrónico</th>
+          <th scope="col">Fecha creación</th>
+          <th scope="col">Fecha actualización</th>
+          <th scope="col">Id plan</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="contenido" *ngFor="let clientes of metodos.clientesTipo2">
+          <td>{{ clientes.id_cliente }}</td>
+          <td>{{ clientes.rut_cliente }}</td>
+          <td>{{ clientes.razon_social }}</td>
+          <td>{{ clientes.fecha_inicio_contrato | ddMmYYYYDate}}</td>
+          <td>{{ clientes.fecha_fin_contrato  | ddMmYYYYDate}}</td>
+          <td>{{ clientes.correo_electronico }}</td>
+          <td>{{ clientes.created_at | ddMmYYYYDate }}</td>
+          <td>{{ clientes.updated_at | ddMmYYYYDate }}</td>
+          <td>{{ clientes.id_plan }}</td>
+          <td *ngIf="clientes.estado == 1; else desactivo">Activo</td>
+          <td>
+            <!-- <a
+            class="botonEditar"
+            (click)="
+              mostrarMetodos('editar'); mostrarClienteTipo2(clientes.id_cliente)
+            "
+            ><mat-icon>edit</mat-icon></a
+          > -->
+<!-- <label class="switch" *ngIf="clientes.estado == 1">
+            <input
+              type="checkbox"
+              (click)="cambiarEstado(clientes.id_cliente, clientes.estado)"
+              checked
+            />
+            <span class="slider round"></span>
+          </label>
+          <label class="switch" *ngIf="clientes.estado == 0">
+            <input
+              type="checkbox"
+              (click)="cambiarEstado(clientes.id_cliente, clientes.estado)"
+            />
+            <span class="slider round"></span>
+          </label> -->
+<!-- <button class="btn btn-success btn-icon-split p-1 mr-1" (click)="
+                mostrarMetodos('editar');
+                mostrarClienteTipo2(clientes.id_cliente)
+              "><i class="fas fa-user-edit"></i>Editar
+
+            </button>
+            <button *ngIf="clientes.estado == 0" class="btn btn-danger btn-icon-split p-1"
+              (click)="cambiarEstado(clientes.id_cliente, clientes.estado)">
+              <i class="fas fa-toggle-off"></i>Activar
+            </button>
+            <button *ngIf="clientes.estado == 1" class="btn btn-info btn-icon-split p-1"
+              (click)="cambiarEstado(clientes.id_cliente, clientes.estado)" checked>
+              <i class="fas fa-toggle-on"></i>Desactivar
+            </button>
+            <!-- <a class="active" *ngIf="usuario.estado==1; else eliminado" (click)="desactivar(usuario.id_usuario)"><mat-icon>toggle_on</mat-icon></a> -->
+<!-- </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #desactivo>
+      <td>Desactivado</td>
+    </ng-template>
+  </div>
+</div> -->
+
+<div class="card border-left-primary" *ngIf="nombreMetodo == 'editar'">
+  <div class="row justify-content-md-center">
+    <div class="col-lg-7">
+      <div class="p-5">
+        <div class="text-center">
+          <h1 class="h4 text-gray-900 mb-4">Editar Cliente</h1>
+        </div>
+        <div *ngFor="let cliente of metodos.clientesTipo2">
+          <div *ngIf="cliente.id_cliente == idCliente">
+            <form class="user" [formGroup]="nuevoCliente">
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <div class="col-12 m-0 p-0 position-relative">
+                    <div *ngIf="
+                        nuevoCliente.controls['rut_cliente'].invalid &&
+                        nuevoCliente.controls['rut_cliente'].touched
+                      ">
+                      <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                        for="rut_cliente">campo obligatorio*</label>
+                    </div>
+                    <input type="text" data-toggle="tooltip" title="Rut Cliente" [(ngModel)]="cliente.rut_cliente"
+                      id="rut_cliente" formControlName="rut_cliente" class="form-control form-control-user"
+                      placeholder="Rut Cliente" />
+                  </div>
+                </div>
+
+                <!-- <div class="col-sm-6 mb-3 mb-sm-0">
+                  <div class="col-12 m-0 p-0 position-relative">
+                    <div *ngIf="
+                        nuevoCliente.controls['dni'].invalid &&
+                        nuevoCliente.controls['dni'].touched
+                      ">
+                      <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                        for="dni">campo obligatorio*</label>
+                    </div>
+                    <input type="text" id="dni" data-toggle="tooltip" title="Dni Cliente" [(ngModel)]="cliente.dni"
+                      formControlName="dni" class="form-control form-control-user" placeholder="DNI Cliente" />
+                  </div>
+                </div> -->
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <div class="col-12 m-0 p-0">
+                    <label class="col-form-label-sm col-form-label ml-3" for="fecha_inicio_contrato">inicio
+                      contrato:</label>
+                    <div *ngIf="
+                        nuevoCliente.controls['fecha_inicio_contrato']
+                          .invalid &&
+                        nuevoCliente.controls['fecha_inicio_contrato'].touched
+                      ">
+                      <label
+                        class="col-form-label-sm col-form-label ml-sm-3 position-absolute text-danger position-2 ml-xs-5"
+                        for="fecha_inicio_contrato">campo obligatorio*</label>
+                    </div>
+                    <input type="date" data-toggle="tooltip" title="Fecha Inicio Contrato"
+                      class="form-control form-control-user" id="fecha_inicio_contrato"
+                      placeholder="fecha inicio contrato" [ngModel]="
+                        cliente.fecha_inicio_contrato | date: 'yyyy-MM-dd':'UTC'
+                      " (ngModelChange)="cliente.fecha_inicio_contrato = $event"
+                      formControlName="fecha_inicio_contrato" />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <label class="col-form-label-sm col-form-label ml-3" for="fecha_fin_contrato">fin contrato:</label>
+                  <div *ngIf="
+                      nuevoCliente.controls['fecha_fin_contrato'].invalid &&
+                      nuevoCliente.controls['fecha_fin_contrato'].touched
+                    ">
+                    <label
+                      class="col-form-label-sm col-form-label ml-sm-3 position-absolute text-danger position-3 ml-xs-5"
+                      for="fecha_fin_contrato">campo obligatorio*</label>
+                  </div>
+                  <input type="date" data-toggle="tooltip" title="Fecha Fin Contrato" [ngModel]="
+                      cliente.fecha_fin_contrato | date: 'yyyy-MM-dd':'UTC'
+                    " (ngModelChange)="cliente.fecha_fin_contrato = $event" class="form-control form-control-user"
+                    id="fecha_fin_contrato" placeholder="fecha fin contrato" formControlName="fecha_fin_contrato" />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <div class="col-12 m-0 p-0 position-relative">
+                    <div *ngIf="
+                        nuevoCliente.controls['correo_electronico'].invalid &&
+                        nuevoCliente.controls['correo_electronico'].touched
+                      ">
+                      <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position-4"
+                        for="correo_electronico">campo obligatorio*</label>
+                    </div>
+                    <input type="mail" data-toggle="tooltip" title="correo_electronico"
+                      [(ngModel)]="cliente.correo_electronico" id="correo_electronico"
+                      formControlName="correo_electronico" class="form-control form-control-user"
+                      placeholder="Correo Electrónico" />
+                  </div>
+                </div>
+
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <div class="col-12 m-0 p-0 position-relative">
+                    <div *ngIf="
+                        nuevoCliente.controls['razon_social'].invalid &&
+                        nuevoCliente.controls['razon_social'].touched
+                      ">
+                      <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                        for="razon_social">campo obligatorio*</label>
+                    </div>
+                    <input data-toggle="tooltip" title="Razón social" [(ngModel)]="cliente.razon_social" type="text"
+                      id="razon_social" formControlName="razon_social" class="form-control form-control-user"
+                      placeholder="Razón Social" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <div *ngIf="
+                      nuevoCliente.controls['id_rol'].invalid &&
+                      nuevoCliente.controls['id_rol'].touched
+                    ">
+                    <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                      for="id_rol">campo obligatorio*</label>
+                  </div>
+                  <!-- <input
+                    type="text"
+                    data-toggle="tooltip"
+                    title="Rol cliente"
+                    [(ngModel)]="cliente.id_rol"
+                    class="form-control form-control-user"
+                    id="id_rol"
+                    placeholder="ID ROL"
+                    formControlName="id_rol"
+                  /> -->
+                  <select id="id_rol" data-toggle="tooltip" title="Rol Cliente" [(ngModel)]="cliente.id_rol"
+                    name="id_rol" formControlName="id_rol" class="form-control border">
+                    <option value="default">
+                      Seleccione el tipo de cliente
+                    </option>
+                    <option value="1">
+                      Super Admin
+                    </option>
+                    <option value="2">
+                      Admin
+                    </option>
+                  </select>
+
+                </div>
+                <div class="col-sm-6 mb-3 mb-sm-0">
+                  <div *ngIf="
+                      nuevoCliente.controls['id_plan'].invalid &&
+                      nuevoCliente.controls['id_plan'].touched
+                    ">
+                    <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                      for="id_plan">campo obligatorio*</label>
+                  </div>
+                  <select id="id_plan" data-toggle="tooltip" title="Plan suscripción" [(ngModel)]="cliente.id_plan"
+                    name="id_plan" formControlName="id_plan" class="form-control border">
+                    <option value="default" >Seleccione plan</option>
+                    <option *ngFor="let plan of metodosPlanes.planes" value="{{ plan.id_plan }}">
+                      {{ plan.nombre_plan }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <button class="btn btn-primary btn-user btn-block" (click)="editarClienteTipo2(nuevoCliente)">
+                <i class="fas fa-check"></i>
+                Guardar Cambios
+              </button>
+              <button class="btn btn-danger btn-user btn-block"
+                (click)="mostrarMetodos('mostrar');mostrarClientesTipo2();">
+                <i class="fas fa-arrow-left"></i>
+                Cancelar
+              </button>
+              <!-- <button class="botonListo" (click)="
+                  mostrarMetodos('mostrar'); agregarClienteTipo2(nuevoCliente)
+                ">
+                  <mat-icon>check_circle</mat-icon>
+            </button>
+            <a class="botonCancelar" (click)="mostrarMetodos('mostrar')" disabled="true">
+              <mat-icon>cancel</mat-icon>
+            </a> -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+<div class="row justify-content-md-center" *ngIf="nombreMetodo == 'editar'">
+  <div *ngFor="let cliente of metodos.clientesTipo2">
+    <div *ngIf="cliente.id_cliente == idCliente">
+      <form [formGroup]="nuevoCliente">
+        <table>
+          <thead>
+            <tr>
+              <th style="position: relative; right:-7vw">Editar Cliente</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <label for="rut_cliente">Rut cliente: </label>
+              </td>
+              <td>
+                <input id="rut_cliente" type="text" formControlName="rut_cliente" [(ngModel)]="cliente.rut_cliente" />
+                <div *ngIf="
+                    nuevoCliente.controls['rut_cliente'].invalid &&
+                    nuevoCliente.controls['rut_cliente'].touched
+                  ">
+                  campo obligatorio
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="dni">Dni: </label>
+              </td>
+              <td>
+                <input id="dni" type="text" formControlName="dni" [(ngModel)]="cliente.dni" />
+                <div *ngIf="
+                    nuevoCliente.controls['dni'].invalid &&
+                    nuevoCliente.controls['dni'].touched
+                  ">
+                  campo obligatorio
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="razon_social">Razon social: </label>
+              </td>
+              <td>
+                <input id="razon_social" type="text" formControlName="razon_social"
+                  [(ngModel)]="cliente.razon_social" />
+                <div *ngIf="
+                    nuevoCliente.controls['razon_social'].invalid &&
+                    nuevoCliente.controls['razon_social'].touched
+                  ">
+                  campo obligatorio
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="fecha_inicio_contrato">Inicio contrato: </label>
+              </td>
+              <td>
+                <input id="fecha_inicio_contrato" type="date" formControlName="fecha_inicio_contrato"
+                  [(ngModel)]="cliente.fecha_inicio_contrato" />
+                <div *ngIf="
+                    nuevoCliente.controls['fecha_inicio_contrato'].invalid &&
+                    nuevoCliente.controls['fecha_inicio_contrato'].touched
+                  ">
+                  campo obligatorio
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="fecha_fin_contrato">Fin contrato: </label>
+              </td>
+              <td>
+                <input id="fecha_fin_contrato" type="date" formControlName="fecha_fin_contrato"
+                  [(ngModel)]="cliente.fecha_fin_contrato" />
+                <div *ngIf="
+                    nuevoCliente.controls['fecha_fin_contrato'].invalid &&
+                    nuevoCliente.controls['fecha_fin_contrato'].touched
+                  ">
+                  campo obligatorio
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="correo_electronico">Correo Electrónico: </label>
+              </td>
+              <td>
+                <input id="correo_electronico" type="mail" formControlName="correo_electronico"
+                  [(ngModel)]="cliente.correo_electronico" />
+                <div *ngIf="
+                    nuevoCliente.controls['correo_electronico'].invalid &&
+                    nuevoCliente.controls['correo_electronico'].touched
+                  ">
+                  campo obligatorio
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="id_rol">Id Rol: </label>
+              </td>
+              <td>
+                <input id="id_rol" type="text" formControlName="id_rol" [(ngModel)]="cliente.id_rol" />
+                <div *ngIf="
+                    nuevoCliente.controls['id_rol'].invalid &&
+                    nuevoCliente.controls['id_rol'].touched
+                  ">
+                  campo obligatorio
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label for="id_plan">Id plan: </label>
+                <div *ngIf="
+                    nuevoCliente.controls['id_plan'].invalid &&
+                    nuevoCliente.controls['id_plan'].touched
+                  ">
+                  campo obligatorio
+                </div>
+              </td>
+              <td>
+                <select id="id_plan" name="id_plan" formControlName="id_plan" [(ngModel)]="cliente.id_plan">
+                  <option id="id_plan" *ngFor="let plan of metodosPlanes.planes" value="{{ plan.id_plan }}">
+                    {{ plan.nombre_plan }}
+                  </option>
+                </select>
+              </td>
+            </tr>
+            <tr id="filaBotones">
+              <td class="c"></td>
+              <td class="c">
+
+                <a class="botonCancelar" (click)="mostrarMetodos('mostrar')">
+                  <mat-icon>cancel</mat-icon>
+                </a>
+                <a class="botonListo" (click)="
+                    mostrarMetodos('mostrar');
+                    editarClienteTipo2(nuevoCliente)
+                  ">
+                  <mat-icon>check_circle</mat-icon>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+<div class="card border-left-primary" *ngIf="nombreMetodo == 'agregar'">
+  <div class="row justify-content-md-center">
+    <div class="col-lg-7">
+      <div class="p-5">
+        <div class="text-center">
+          <h1 class="h4 text-gray-900 mb-4">Agregar Cliente</h1>
+        </div>
+        <form class="user" [formGroup]="nuevoCliente">
+          <div class="form-group row justify-content-md-center">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="col-12 m-0 p-0 position-relative">
+                <div *ngIf="
+                    nuevoCliente.controls['rut_cliente'].invalid &&
+                    nuevoCliente.controls['rut_cliente'].touched
+                  ">
+                  <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                    for="rut_cliente">campo obligatorio*</label>
+                </div>
+                <input type="text" data-toggle="tooltip" title="Rut Cliente" id="rut_cliente"
+                  formControlName="rut_cliente" class="form-control form-control-user" placeholder="Rut Cliente" />
+              </div>
+            </div>
+
+            <!-- <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="col-12 m-0 p-0 position-relative">
+                <div *ngIf="
+                    nuevoCliente.controls['dni'].invalid &&
+                    nuevoCliente.controls['dni'].touched
+                  ">
+                  <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                    for="dni">campo obligatorio*</label>
+                </div>
+                <input type="text" id="dni" data-toggle="tooltip" title="DNI Cliente" formControlName="dni"
+                  class="form-control form-control-user" placeholder="DNI Cliente" />
+              </div>
+            </div> -->
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="col-12 m-0 p-0">
+                <label class="col-form-label-sm col-form-label ml-3" for="fecha_inicio_contrato">inicio
+                  contrato:</label>
+                <div *ngIf="
+                    nuevoCliente.controls['fecha_inicio_contrato'].invalid &&
+                    nuevoCliente.controls['fecha_inicio_contrato'].touched
+                  ">
+                  <label
+                    class="col-form-label-sm col-form-label ml-sm-3 position-absolute text-danger position-2 ml-xs-5"
+                    for="fecha_inicio_contrato">campo obligatorio*</label>
+                </div>
+                <input type="date" data-toggle="tooltip" title="Fecha Inicio Contrato"
+                  class="form-control form-control-user" id="fecha_inicio_contrato" placeholder="fecha inicio contrato"
+                  formControlName="fecha_inicio_contrato" />
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label class="col-form-label-sm col-form-label ml-3" for="fecha_fin_contrato">fin contrato:</label>
+              <div *ngIf="
+                  nuevoCliente.controls['fecha_fin_contrato'].invalid &&
+                  nuevoCliente.controls['fecha_fin_contrato'].touched
+                ">
+                <label class="col-form-label-sm col-form-label ml-sm-3 position-absolute text-danger position-3 ml-xs-5"
+                  for="fecha_fin_contrato">campo obligatorio*</label>
+              </div>
+              <input type="date" data-toggle="tooltip" title="Fecha Fin Contrato" class="form-control form-control-user"
+                id="fecha_fin_contrato" placeholder="fecha fin contrato" formControlName="fecha_fin_contrato" />
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="col-12 m-0 p-0 position-relative">
+                <div *ngIf="
+                    nuevoCliente.controls['correo_electronico'].invalid &&
+                    nuevoCliente.controls['correo_electronico'].touched
+                  ">
+                  <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position-4"
+                    for="correo_electronico">campo obligatorio*</label>
+                </div>
+                <input type="mail" data-toggle="tooltip" title="correo_electronico" id="correo_electronico"
+                  formControlName="correo_electronico" class="form-control form-control-user"
+                  placeholder="Correo Electrónico" pattern="^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$" />
+              </div>
+            </div>
+
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="col-12 m-0 p-0 position-relative">
+                <div *ngIf="
+                    nuevoCliente.controls['razon_social'].invalid &&
+                    nuevoCliente.controls['razon_social'].touched
+                  ">
+                  <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                    for="razon_social">campo obligatorio*</label>
+                </div>
+                <input type="text" id="razon_social" data-toggle="tooltip" title="Razón Social"
+                  formControlName="razon_social" class="form-control form-control-user" id="razon_social"
+                  placeholder="Razón Social" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div *ngIf="
+                  nuevoCliente.controls['id_rol'].invalid &&
+                  nuevoCliente.controls['id_rol'].touched
+                ">
+                <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                  for="id_rol">campo obligatorio*</label>
+              </div>
+              <!-- <input
+                type="text"
+                data-toggle="tooltip"
+                title="id Rol Cliente"
+                class="form-control form-control-user"
+                id="id_rol"
+                placeholder="Id Rol"
+                formControlName="id_rol"
+              /> -->
+              <select id="id_rol" data-toggle="tooltip" title="Rol Cliente"  name="id_rol"
+                formControlName="id_rol" class="form-control border" [(ngModel)]="valueSelectRol">
+                <option value="default" selected>
+                  Seleccione el tipo de cliente
+                </option>
+                <option value="1">
+                  Super Admin
+                </option>
+                <option value="2">
+                  Admin
+                </option>
+              </select>
+            </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div *ngIf="
+                  nuevoCliente.controls['id_plan'].invalid &&
+                  nuevoCliente.controls['id_plan'].touched
+                ">
+                <label class="col-form-label-sm col-form-label ml-3 position-absolute text-danger position"
+                  for="id_rol">campo obligatorio*</label>
+              </div>
+              <select id="id_plan" data-toggle="tooltip" title="Plan suscripción" name="id_plan"
+                formControlName="id_plan" class="form-control border" [(ngModel)]="valueSelect">
+                <option value="default" selected>Seleccione plan</option>
+                <option id="id_plan" *ngFor="let plan of metodosPlanes.planes" value="{{ plan.id_plan }}">
+                  {{ plan.nombre_plan }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-user btn-block" (click)="agregarClienteTipo2(nuevoCliente)">
+            <i class="fas fa-check"></i>
+            Agregar Cuenta
+          </button>
+          <button class="btn btn-danger btn-user btn-block" (click)="mostrarMetodos('mostrar')">
+            <i class="fas fa-arrow-left"></i>
+            Cancelar
+          </button>
+          <!-- <button class="botonListo" (click)="
+              mostrarMetodos('mostrar'); agregarClienteTipo2(nuevoCliente)
+            ">
+              <mat-icon>check_circle</mat-icon>
+        </button>
+        <a class="botonCancelar" (click)="mostrarMetodos('mostrar')" disabled="true">
+          <mat-icon>cancel</mat-icon>
+        </a> -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+<div class="row justify-content-md-center" *ngIf="nombreMetodo == 'agregar'">
+  <form [formGroup]="nuevoCliente">
+    <table>
+      <thead>
+        <tr>
+          <th style="position: relative; right:-7vw">Agregar Cliente</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <label for="rut_cliente">Rut cliente: </label>
+          </td>
+          <td>
+            <input id="rut_cliente" type="text" formControlName="rut_cliente" />
+            <div *ngIf="
+                nuevoCliente.controls['rut_cliente'].invalid &&
+                nuevoCliente.controls['rut_cliente'].touched
+              ">
+              campo obligatorio
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="dni">Dni: </label>
+          </td>
+          <td>
+            <input id="dni" type="text" formControlName="dni" />
+            <div *ngIf="
+                nuevoCliente.controls['dni'].invalid &&
+                nuevoCliente.controls['dni'].touched
+              ">
+              campo obligatorio
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="razon_social">Razon social: </label>
+          </td>
+          <td>
+            <input id="razon_social" type="text" formControlName="razon_social" />
+            <div *ngIf="
+                nuevoCliente.controls['razon_social'].invalid &&
+                nuevoCliente.controls['razon_social'].touched
+              ">
+              campo obligatorio
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="fecha_inicio_contrato">Inicio contrato: </label>
+          </td>
+          <td>
+            <input id="fecha_inicio_contrato" type="date" formControlName="fecha_inicio_contrato" />
+            <div *ngIf="
+                nuevoCliente.controls['fecha_inicio_contrato'].invalid &&
+                nuevoCliente.controls['fecha_inicio_contrato'].touched
+              ">
+              campo obligatorio
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="fecha_fin_contrato">Fin contrato: </label>
+          </td>
+          <td>
+            <input id="fecha_fin_contrato" type="date" formControlName="fecha_fin_contrato" />
+            <div *ngIf="
+                nuevoCliente.controls['fecha_fin_contrato'].invalid &&
+                nuevoCliente.controls['fecha_fin_contrato'].touched
+              ">
+              campo obligatorio
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="correo_electronico">Correo Electrónico: </label>
+          </td>
+          <td>
+            <input id="correo_electronico" type="mail" formControlName="correo_electronico" />
+            <div *ngIf="
+                nuevoCliente.controls['correo_electronico'].invalid &&
+                nuevoCliente.controls['correo_electronico'].touched
+              ">
+              campo obligatorio
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="id_rol">Id Rol: </label>
+          </td>
+          <td>
+            <input id="id_rol" type="text" formControlName="id_rol" />
+            <div *ngIf="
+                nuevoCliente.controls['id_rol'].invalid &&
+                nuevoCliente.controls['id_rol'].touched
+              ">
+              campo obligatorio
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label for="id_plan">Id plan: </label>
+            <div *ngIf="
+                nuevoCliente.controls['id_plan'].invalid &&
+                nuevoCliente.controls['id_plan'].touched
+              ">
+              campo obligatorio
+            </div>
+          </td>
+          <td>
+            <select id="id_plan" name="id_plan" formControlName="id_plan">
+              <option id="id_plan" *ngFor="let plan of metodosPlanes.planes" value="{{ plan.id_plan }}">
+                {{ plan.nombre_plan }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr id="filaBotones">
+          <td class="c"></td>
+          <td class="c">
+            <a class="botonCancelar" (click)="mostrarMetodos('mostrar')" disabled="true">
+              <mat-icon>cancel</mat-icon>
+            </a>
+            <a class="botonListo" (click)="
+              mostrarMetodos('mostrar'); agregarClienteTipo2(nuevoCliente)
+            ">
+              <mat-icon>check_circle</mat-icon>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div> -->

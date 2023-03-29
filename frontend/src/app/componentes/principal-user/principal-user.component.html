@@ -1,0 +1,265 @@
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css">
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+<link rel="mask-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+<link rel="canonical" href="https://codepen.io/azouaoui-med/pen/wpBadb">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css">
+<div class="layout has-sidebar fixed-sidebar fixed-header">
+    <aside id="sidebar" class="sidebar break-point-lg has-bg-image">
+        <div class="image-wrapper">
+            <!-- <img src="https://media-exp1.licdn.com/dms/image/C4E1BAQFMQrV5ysuU3g/company-background_10000/0/1598106799067?e=2159024400&v=beta&t=5jaYfIbBEIWSfJtCLm4PATk5tofHTqSKE0p4HTc9rfM" alt="sidebar background" /> -->
+        </div>
+        <div class="sidebar-layout">
+            <div class="sidebar-header">
+                <span style="
+                text-transform: uppercase;
+                font-size: 15px;
+                letter-spacing: 3px;
+                font-weight: bold;
+              ">Analitic </span>
+                <p class="usuario"></p>
+            </div>
+            <div class="sidebar-content">
+                <nav class="menu open-current-submenu">
+                    <ul>
+                        <li  class="menu-item sub-menu" >
+                            <a>
+                                <span class="menu-icon">
+                                  <i class="ri-vip-diamond-fill" ></i>
+                                </span>
+                                <span class="menu-title">Clientes</span>
+                                <!-- <span class="menu-suffix">&#x1F525;</span> -->
+                            </a>
+                            <div class="sub-menu-list">
+                                <ul>
+                                    <li class="menu-item" >
+                                        <a>
+                                            <span class="menu-title" (click)="Seccion(1)">Clientes Premium</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a>
+                                            <span class="menu-title" (click)="Seccion(3)">Clientes Normales</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item sub-menu">
+                                        <a>
+                                            <span class="menu-title">Clientes Demos</span>
+                                        </a>
+                                        <div class="sub-menu-list">
+                                            <ul>
+                                                <li class="menu-item">
+                                                    <a>
+                                                        <span class="menu-title">Input</span>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item">
+                                                    <a>
+                                                        <span class="menu-title">Select</span>
+                                                    </a>
+                                                </li>
+                                                <li class="menu-item sub-menu">
+                                                    <a>
+                                                        <span class="menu-title">More</span>
+                                                    </a>
+                                                    <div class="sub-menu-list">
+                                                        <ul>
+                                                            <li class="menu-item">
+                                                                <a>
+                                                                    <span class="menu-title">CheckBox</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item">
+                                                                <a>
+                                                                    <span class="menu-title">Radio</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="menu-item sub-menu">
+                                                                <a>
+                                                                    <span class="menu-title">Want more ?</span>
+                                                                    <span class="menu-suffix">&#x1F914;</span>
+                                                                </a>
+                                                                <div class="sub-menu-list">
+                                                                    <ul>
+                                                                        <li class="menu-item">
+                                                                            <a>
+                                                                                <span class="menu-prefix">&#127881;</span>
+                                                                                <span class="menu-title">You made it </span>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="menu-item sub-menu">
+                            <a>
+                                <span class="menu-icon">
+                  <i class="ri-bar-chart-2-fill"></i>
+                </span>
+                                <span class="menu-title">Graficos</span>
+                            </a>
+                            <div class="sub-menu-list">
+                                <ul>
+                                    <li class="menu-item">
+                                        <a>
+                                            <span class="menu-title" (click)="Seccion(4)">Grafico 1</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a>
+                                            <span class="menu-title">Grafico 2</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a>
+                                            <span class="menu-title">Grafico 3</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="menu-item sub-menu">
+                            <a>
+                                <span class="menu-icon">
+                  <i class="ri-shopping-cart-fill"></i>
+                </span>
+                                <span class="menu-title">Planes</span>
+                            </a>
+                            <div class="sub-menu-list">
+                                <ul>
+                                    <li class="menu-item">
+                                        <a>
+                                            <span class="menu-title">Plan Premiun</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a>
+                                            <span class="menu-title">Plan Normal</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a>
+                                            <span class="menu-title">Plan Basico</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="menu-item sub-menu">
+                            <a>
+                                <span class="menu-icon">
+                  <i class="ri-global-fill"></i>
+                </span>
+                                <span class="menu-title">Maps</span>
+                            </a>
+                            <div class="sub-menu-list">
+                                <ul>
+                                    <li class="menu-item">
+                                        <a>
+                                            <span class="menu-title">Google maps</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a>
+                                            <span class="menu-title">Open street map</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="menu-item sub-menu">
+                            <a>
+                                <span class="menu-icon">
+                  <i class="ri-brush-3-fill"></i>
+                </span>
+                                <span class="menu-title">Theme</span>
+                            </a>
+                            <div class="sub-menu-list">
+                                <ul>
+                                    <li class="menu-item">
+                                        <a>
+                                            <span class="menu-title" id="dark">Dark</span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a>
+                                            <span class="menu-title" id="light">Light</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="menu-item">
+                            <a>
+                                <span class="menu-icon">
+                  <i class="ri-book-2-fill"></i>
+                </span>
+                                <span class="menu-title">Documentacion</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a>
+                                <span class="menu-icon">
+                  <i class="ri-calendar-fill"></i>
+                </span>
+                                <span class="menu-title">Calendario</span>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a>
+                                <span class="menu-icon">
+                  <i class="ri-service-fill"></i>
+                </span>
+                                <span class="menu-title">Extras</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="sidebar-footer" ><span>Copyright © 2022 Sebastian & Dann</span></div>
+        </div>
+    </aside>
+    <div id="overlay" class="overlay">
+    </div>
+    <div class="layout">
+        <header class="header">
+            <a id="btn-collapse">
+                <i class="ri-menu-line ri-xl"></i>
+            </a>
+            <a id="btn-toggle" class="sidebar-toggler break-point-lg">
+                <i class="ri-menu-line ri-xl"></i>
+            </a>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="material-icons-round">
+                  account_circle
+                  </span>
+                {{a}}
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Perfil</a></li>
+                <li><a class="dropdown-item" href="#">Help</a></li>
+                <li><a class="dropdown-item" href="#">Cerrar Sesion</a></li>
+              </ul>
+            </div>
+        </header>
+        <div class="mainly">
+            <!-- <app-accounts *ngIf="num1==1"></app-accounts> -->
+            <!-- <app-extractions *ngIf="num1==3"></app-extractions> -->
+            <!-- <app-home *ngIf="num1==4"></app-home> -->
+            <!-- <button routerLink="/"></button> -->
+            <!-- <div class="overlay"></div> -->
+        </div>
+    </div>

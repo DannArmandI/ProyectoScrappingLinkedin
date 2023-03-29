@@ -1,0 +1,100 @@
+version: '2'
+
+services:
+  db:
+    image: mysql:8.0
+    hostname: db
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: elpandaescuchaqueen
+      MYSQL_DATABASE: demoLinkedinScrapper3
+      MYSQL_USER: worker
+      MYSQL_PASSWORD: elpandaescuchaqueen
+    ports:
+      - "5901:3306"
+    networks:
+      - linkednet
+
+  selenium:
+    image: selenium/standalone-edge:4.1.2
+    hostname: selenium
+    shm_size: 2g
+    # Para debug puerto 7900
+    # para los test, 4444
+    # password: "secret"
+    ports:
+      - "7900:7900"
+    networks:
+      - linkednet
+
+  rpa-scrapper:
+    build: ./codigo_scrapper/
+    hostname: rpa-scrapper
+    # command: python test_selenium.py
+    volumes:
+     - ./codigo_scrapper:/usr/src/app
+    environment:
+     - ISDOCKER=1
+    networks:
+     - linkednet
+
+  rpa-backend:
+    build: ./backend/
+    hostname: rpa-backend
+    # --------------- instalar dependencias ---------------
+    # docker-compose run rpa-backend bash -c "npm install && chown node /home/node/app/node_modules && chmod 775 /home/node/app/node_modules"
+    # o alternativamente:
+    # user: "root"
+    # command: bash -c "npm install && chown node /home/node/app/node_modules && chmod 775 /home/node/app/node_modules"
+    # -----------------------------------------------------
+    # --------------- iniciar app ---------------
+    # docker-compose run -u node rpa-backend npm start
+    # o
+    # docker-compose run -u node rpa-backend npm run dev
+    user: "node"
+    command: "npm start"
+    # -------------------------------------------
+    working_dir: /home/node/app
+    # environment:
+    #  # - NODE_ENV=production
+    #  # - NODE_ENV=development
+    volumes:
+     - ./backend:/home/node/app
+    ports:
+      - "3002:3002"
+    networks:
+      - linkednet
+
+  rpa-frontend:
+    build: ./frontend/
+    hostname: rpa-frontend
+    # --------------- instalar dependencias ---------------
+    # docker-compose run rpa-frontend bash -c "npm install && chown node /home/node/app/node_modules && chmod 775 /home/node/app/node_modules"
+    # o alternativamente:
+    # user: "root"
+    # command: bash -c "npm install && chown node /home/node/app/node_modules && chmod 775 /home/node/app/node_modules"
+    # -----------------------------------------------------
+    # --------------- iniciar app ---------------
+    # docker-compose run -u node rpa-frontend bash -c "ng serve --host 0.0.0.0 --disableHostCheck"
+    # o alternativamente:
+    # user: "node"
+    command: "ng serve --host 0.0.0.0 --disableHostCheck"
+    # -------------------------------------------
+    working_dir: /home/node/app
+  #  # environment:
+  #  #   - NODE_ENV=production
+  #  #   - NODE_ENV=development
+    ports:
+      - "4200:4200"
+    volumes:
+     - ./frontend:/home/node/app
+    networks:
+     - linkednet
+
+
+networks:
+  linkednet:
+    driver: bridge
